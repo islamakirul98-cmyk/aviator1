@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator - Neon Rocket Crash Game</title>
+    <meta name="description" content="Play the ultimate neon rocket crash game! Bet virtual credits, watch the rocket soar, and cash out before it crashes.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- TOP HEADER NAVBAR -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fa-solid fa-rocket animate-float"></i></span>
+                    <span class="logo-text">AVIATOR<span class="logo-sub">ROCKET</span></span>
+                </div>
+                <div class="online-players">
+                    <span class="pulse-dot"></span>
+                    <span id="player-count">3,124 playing</span>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <!-- Balance Widget -->
+                <div class="balance-container">
+                    <span class="balance-label">DEMO BALANCE</span>
+                    <span class="balance-value" id="balance-amount">$1,000.00</span>
+                    <button class="refill-btn" id="btn-refill" title="Free Balance Refill">
+                        <i class="fa-solid fa-rotate-right"></i> Refill
+                    </button>
+                </div>
+                
+                <!-- Controls -->
+                <div class="control-buttons">
+                    <button class="control-btn" id="btn-sound-toggle" title="Toggle Sound">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <button class="control-btn" id="btn-profile" title="Player Profile">
+                        <i class="fa-solid fa-user"></i>
+                    </button>
+                    <button class="control-btn info-btn" id="btn-rules" title="How to Play">
+                        <i class="fa-solid fa-circle-question"></i> How to Play
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MULTIPLIER HISTORY STRIP -->
+        <section class="history-bar">
+            <div class="history-label">
+                <i class="fa-solid fa-clock-rotate-left"></i> History:
+            </div>
+            <div class="history-scroll" id="history-container">
+                <!-- Multiplier pills will be dynamically inserted here -->
+                <span class="multiplier-pill low">1.12x</span>
+                <span class="multiplier-pill medium">2.45x</span>
+                <span class="multiplier-pill low">1.03x</span>
+                <span class="multiplier-pill high">12.50x</span>
+                <span class="multiplier-pill medium">4.89x</span>
+                <span class="multiplier-pill low">1.50x</span>
+                <span class="multiplier-pill high">25.04x</span>
+                <span class="multiplier-pill low">1.18x</span>
+                <span class="multiplier-pill low">1.09x</span>
+                <span class="multiplier-pill medium">3.12x</span>
+            </div>
+        </section>
+
+        <!-- MAIN APP WORKSPACE -->
+        <main class="game-workspace">
+            <!-- Left/Stats Sidebar Container -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-tabs">
+                    <button class="tab-btn active" data-tab="all-bets" id="tab-all-bets">
+                        <i class="fa-solid fa-users"></i> Live Bets
+                    </button>
+                    <button class="tab-btn" data-tab="my-bets" id="tab-my-bets">
+                        <i class="fa-solid fa-clock"></i> My Bets
+                    </button>
+                    <button class="tab-btn" data-tab="chat" id="tab-chat">
+                        <i class="fa-solid fa-comments"></i> Chat
+                    </button>
+                </div>
+
+                <div class="sidebar-content">
+                    <!-- Tab Panel: Live Bets -->
+                    <div class="tab-panel active" id="panel-all-bets">
+                        <div class="bets-summary">
+                            <span class="total-bets-count" id="live-bets-count">Total bets: 184</span>
+                            <span class="total-bets-amount" id="live-bets-sum">$8,450.00</span>
+                        </div>
+                        <div class="bets-table-container">
+                            <table class="bets-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Bet</th>
+                                        <th>Mult.</th>
+                                        <th>Cash out</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="live-bets-list">
+                                    <!-- Simulated live player bets added by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel: My Bets -->
+                    <div class="tab-panel" id="panel-my-bets">
+                        <div class="my-bets-summary">
+                            <div class="summary-card">
+                                <span class="summary-label">Rounds</span>
+                                <span class="summary-value" id="my-rounds-count">0</span>
+                            </div>
+                            <div class="summary-card">
+                                <span class="summary-label">Profit</span>
+                                <span class="summary-value" id="my-profit-val">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="bets-table-container">
+                            <table class="bets-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Bet</th>
+                                        <th>Mult.</th>
+                                        <th>Win</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="my-bets-list">
+                                    <!-- Player bet records -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel: Chat -->
+                    <div class="tab-panel" id="panel-chat">
+                        <div class="chat-messages" id="chat-messages-container">
+                            <!-- Chat messages added by JS simulation -->
+                        </div>
+                        <form class="chat-input-area" id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Send a message..." maxlength="100" required>
+                            <button type="submit" id="btn-chat-send" title="Send Message">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Game Arena -->
+            <div class="game-arena">
+                <!-- Flight Canvas Area -->
+                <div class="canvas-card">
+                    <!-- Overlay screens -->
+                    <div class="canvas-overlay waiting-overlay" id="overlay-waiting">
+                        <div class="countdown-container">
+                            <span class="countdown-label">NEXT ROUND IN</span>
+                            <span class="countdown-timer" id="countdown-timer">5.0s</span>
+                            <div class="countdown-bar">
+                                <div class="countdown-bar-fill" id="countdown-bar-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="canvas-overlay crashed-overlay hidden" id="overlay-crashed">
+                        <div class="crash-container">
+                            <span class="crash-label">FLEW AWAY !</span>
+                            <span class="crash-value" id="crash-multiplier">2.45x</span>
+                        </div>
+                    </div>
+
+                    <div class="canvas-overlay active-overlay" id="overlay-active">
+                        <span class="current-multiplier" id="current-multiplier">1.00x</span>
+                    </div>
+
+                    <!-- Canvas -->
+                    <canvas id="flight-canvas"></canvas>
+                </div>
+
+                <!-- Dual Betting Panel Container -->
+                <div class="betting-dashboard">
+                    <!-- Betting Card A -->
+                    <div class="betting-card" id="betting-card-1">
+                        <div class="bet-tabs">
+                            <button class="bet-tab-btn active" data-mode="manual" id="card1-manual-tab">Bet</button>
+                            <button class="bet-tab-btn" data-mode="auto" id="card1-auto-tab">Auto</button>
+                        </div>
+                        
+                        <div class="bet-body">
+                            <!-- Left: Bet Value Config -->
+                            <div class="bet-config">
+                                <div class="number-input-group">
+                                    <button class="num-adjust-btn" id="card1-bet-minus" type="button"><i class="fa-solid fa-minus"></i></button>
+                                    <input class="bet-amount-input" id="card1-bet-amount" type="number" min="1" max="1000" step="1" value="10">
+                                    <button class="num-adjust-btn" id="card1-bet-plus" type="button"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                                <div class="quick-bet-grid">
+                                    <button class="quick-bet-btn" data-val="10">$10</button>
+                                    <button class="quick-bet-btn" data-val="50">$50</button>
+                                    <button class="quick-bet-btn" data-val="100">$100</button>
+                                    <button class="quick-bet-btn" data-val="500">$500</button>
+                                </div>
+                            </div>
+
+                            <!-- Right: Giant Bet CTA Button -->
+                            <div class="bet-action">
+                                <button class="action-btn bet-state" id="card1-action-btn">
+                                    <span class="btn-top-label">BET</span>
+                                    <span class="btn-main-val" id="card1-btn-amount">$10.00</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Auto configuration section (hidden by default unless active tab is 'auto') -->
+                        <div class="auto-panel-section hidden" id="card1-auto-panel">
+                            <div class="auto-row">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="card1-auto-bet-toggle">
+                                    <span class="checkmark"></span>
+                                    Auto Bet
+                                </label>
+                                <div class="auto-cashout-group">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="card1-auto-cash-toggle">
+                                        <span class="checkmark"></span>
+                                        Auto Cash Out
+                                    </label>
+                                    <input class="auto-cashout-input" id="card1-auto-cash-value" type="number" min="1.01" max="1000" step="0.01" value="2.00" disabled>
+                                    <span class="auto-cashout-unit">x</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Betting Card B -->
+                    <div class="betting-card" id="betting-card-2">
+                        <div class="bet-tabs">
+                            <button class="bet-tab-btn active" data-mode="manual" id="card2-manual-tab">Bet</button>
+                            <button class="bet-tab-btn" data-mode="auto" id="card2-auto-tab">Auto</button>
+                        </div>
+                        
+                        <div class="bet-body">
+                            <!-- Left: Bet Value Config -->
+                            <div class="bet-config">
+                                <div class="number-input-group">
+                                    <button class="num-adjust-btn" id="card2-bet-minus" type="button"><i class="fa-solid fa-minus"></i></button>
+                                    <input class="bet-amount-input" id="card2-bet-amount" type="number" min="1" max="1000" step="1" value="20">
+                                    <button class="num-adjust-btn" id="card2-bet-plus" type="button"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                                <div class="quick-bet-grid">
+                                    <button class="quick-bet-btn" data-val="10">$10</button>
+                                    <button class="quick-bet-btn" data-val="50">$50</button>
+                                    <button class="quick-bet-btn" data-val="100">$100</button>
+                                    <button class="quick-bet-btn" data-val="500">$500</button>
+                                </div>
+                            </div>
+
+                            <!-- Right: Giant Bet CTA Button -->
+                            <div class="bet-action">
+                                <button class="action-btn bet-state" id="card2-action-btn">
+                                    <span class="btn-top-label">BET</span>
+                                    <span class="btn-main-val" id="card2-btn-amount">$20.00</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Auto configuration section (hidden by default unless active tab is 'auto') -->
+                        <div class="auto-panel-section hidden" id="card2-auto-panel">
+                            <div class="auto-row">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="card2-auto-bet-toggle">
+                                    <span class="checkmark"></span>
+                                    Auto Bet
+                                </label>
+                                <div class="auto-cashout-group">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="card2-auto-cash-toggle">
+                                        <span class="checkmark"></span>
+                                        Auto Cash Out
+                                    </label>
+                                    <input class="auto-cashout-input" id="card2-auto-cash-value" type="number" min="1.01" max="1000" step="0.01" value="2.00" disabled>
+                                    <span class="auto-cashout-unit">x</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: HOW TO PLAY -->
+    <div class="modal-overlay hidden" id="modal-rules">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-circle-question"></i> How to Play Aviator Rocket</h3>
+                <button class="modal-close-btn" id="btn-close-rules"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <ol class="rules-list">
+                    <li>
+                        <strong>Place Your Bet:</strong> Adjust your bet amount in one or both of the betting panels and click the green <strong>"BET"</strong> button before the round begins.
+                    </li>
+                    <li>
+                        <strong>Watch the Rocket Take Off:</strong> As the round starts, the rocket climbs high, and the multiplier increases exponentially, starting from <strong>1.00x</strong>.
+                    </li>
+                    <li>
+                        <strong>Cash Out in Time:</strong> Press the orange <strong>"CASH OUT"</strong> button at any moment to secure your winning payout: your bet multiplied by the current flight multiplier.
+                    </li>
+                    <li>
+                        <strong>Avoid the Crash:</strong> If the rocket crashes ("FLEW AWAY") before you click Cash Out, you lose your bet. The crash point is determined by a random number generator before takeoff, making each flight completely unpredictable!
+                    </li>
+                    <li>
+                        <strong>Dual Betting & Auto Modes:</strong> Use the second betting panel to place a backup bet. Use the <strong>"Auto"</strong> tabs to configure automatic betting or automatic cashing out at a specified multiplier (e.g. 2.00x).
+                    </li>
+                </ol>
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i> This is a <strong>free demo mode simulator</strong>. No real currency is used. You can refill your balance anytime by clicking the "Refill" button in the header.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="btn-rules-ok">Let's Play!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PROFILE & AVATAR SETTINGS -->
+    <div class="modal-overlay hidden" id="modal-profile">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-gear"></i> Player Profile</h3>
+                <button class="modal-close-btn" id="btn-close-profile"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-editor">
+                    <div class="avatar-selection-area">
+                        <label class="modal-label">Choose Avatar</label>
+                        <div class="avatar-grid">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=RocketPilot1" alt="Avatar 1" class="avatar-option active" data-seed="RocketPilot1">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=CosmicFlyer" alt="Avatar 2" class="avatar-option" data-seed="CosmicFlyer">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=StarGazer" alt="Avatar 3" class="avatar-option" data-seed="StarGazer">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=NebulaRider" alt="Avatar 4" class="avatar-option" data-seed="NebulaRider">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=GalaxyCruiser" alt="Avatar 5" class="avatar-option" data-seed="GalaxyCruiser">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AstroCommander" alt="Avatar 6" class="avatar-option" data-seed="AstroCommander">
+                        </div>
+                    </div>
+                    <div class="username-field">
+                        <label class="modal-label" for="profile-username">Username</label>
+                        <input type="text" id="profile-username" value="Pilot_Demo" maxlength="15" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-profile-cancel">Cancel</button>
+                <button class="btn btn-primary" id="btn-profile-save">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast hidden" id="toast-notification">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span class="toast-message" id="toast-message-text">Bet placed successfully!</span>
+    </div>
+
+    <!-- Script imports -->
+    <script src="audio.js"></script>
+    <script src="game.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>
