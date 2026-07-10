@@ -1,381 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aviator - Neon Rocket Crash Game</title>
-    <meta name="description" content="Play the ultimate neon rocket crash game! Bet virtual credits, watch the rocket soar, and cash out before it crashes.">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranjan Gamer - Instant Gaming Delivery in 10 Mins</title>
+  <meta name="description" content="Get gaming consoles, keyboards, mice, energy drinks, and digital game codes delivered to your gaming den in 10 minutes from Ranjan Gamer.">
+  
+  <!-- Google Fonts - Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet Map CSS & JS CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- TOP HEADER NAVBAR -->
-        <header class="main-header">
-            <div class="header-left">
-                <div class="logo">
-                    <span class="logo-icon"><i class="fa-solid fa-rocket animate-float"></i></span>
-                    <span class="logo-text">AVIATOR<span class="logo-sub">ROCKET</span></span>
-                </div>
-                <div class="online-players">
-                    <span class="pulse-dot"></span>
-                    <span id="player-count">3,124 playing</span>
-                </div>
-            </div>
-            
-            <div class="header-right">
-                <!-- Balance Widget -->
-                <div class="balance-container">
-                    <span class="balance-label">DEMO BALANCE</span>
-                    <span class="balance-value" id="balance-amount">$1,000.00</span>
-                    <button class="refill-btn" id="btn-refill" title="Free Balance Refill">
-                        <i class="fa-solid fa-rotate-right"></i> Refill
-                    </button>
-                </div>
-                
-                <!-- Controls -->
-                <div class="control-buttons">
-                    <button class="control-btn" id="btn-sound-toggle" title="Toggle Sound">
-                        <i class="fa-solid fa-volume-high"></i>
-                    </button>
-                    <button class="control-btn" id="btn-profile" title="Player Profile">
-                        <i class="fa-solid fa-user"></i>
-                    </button>
-                    <button class="control-btn info-btn" id="btn-rules" title="How to Play">
-                        <i class="fa-solid fa-circle-question"></i> How to Play
-                    </button>
-                </div>
-            </div>
-        </header>
 
-        <!-- MULTIPLIER HISTORY STRIP -->
-        <section class="history-bar">
-            <div class="history-label">
-                <i class="fa-solid fa-clock-rotate-left"></i> History:
-            </div>
-            <div class="history-scroll" id="history-container">
-                <!-- Multiplier pills will be dynamically inserted here -->
-                <span class="multiplier-pill low">1.12x</span>
-                <span class="multiplier-pill medium">2.45x</span>
-                <span class="multiplier-pill low">1.03x</span>
-                <span class="multiplier-pill high">12.50x</span>
-                <span class="multiplier-pill medium">4.89x</span>
-                <span class="multiplier-pill low">1.50x</span>
-                <span class="multiplier-pill high">25.04x</span>
-                <span class="multiplier-pill low">1.18x</span>
-                <span class="multiplier-pill low">1.09x</span>
-                <span class="multiplier-pill medium">3.12x</span>
-            </div>
-        </section>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <!-- Logo and Location -->
+      <div class="header-left">
+        <h1 class="app-logo" id="main-logo-heading">
+          <span class="logo-ranjan">RANJAN</span><span class="logo-gamer">GAMER</span>
+        </h1>
+        <button class="special-location-btn" id="location-selector" aria-label="Select Delivery Location">
+          <span class="loc-pin">📍</span>
+          <span class="loc-text" id="current-location-text">Room 404, Cyber St, Tech Zone</span>
+          <span class="loc-arrow">▼</span>
+        </button>
+      </div>
 
-        <!-- MAIN APP WORKSPACE -->
-        <main class="game-workspace">
-            <!-- Left/Stats Sidebar Container -->
-            <aside class="sidebar" id="sidebar">
-                <div class="sidebar-tabs">
-                    <button class="tab-btn active" data-tab="all-bets" id="tab-all-bets">
-                        <i class="fa-solid fa-users"></i> Live Bets
-                    </button>
-                    <button class="tab-btn" data-tab="my-bets" id="tab-my-bets">
-                        <i class="fa-solid fa-clock"></i> My Bets
-                    </button>
-                    <button class="tab-btn" data-tab="chat" id="tab-chat">
-                        <i class="fa-solid fa-comments"></i> Chat
-                    </button>
-                </div>
-
-                <div class="sidebar-content">
-                    <!-- Tab Panel: Live Bets -->
-                    <div class="tab-panel active" id="panel-all-bets">
-                        <div class="bets-summary">
-                            <span class="total-bets-count" id="live-bets-count">Total bets: 184</span>
-                            <span class="total-bets-amount" id="live-bets-sum">$8,450.00</span>
-                        </div>
-                        <div class="bets-table-container">
-                            <table class="bets-table">
-                                <thead>
-                                    <tr>
-                                        <th>User</th>
-                                        <th>Bet</th>
-                                        <th>Mult.</th>
-                                        <th>Cash out</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="live-bets-list">
-                                    <!-- Simulated live player bets added by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Tab Panel: My Bets -->
-                    <div class="tab-panel" id="panel-my-bets">
-                        <div class="my-bets-summary">
-                            <div class="summary-card">
-                                <span class="summary-label">Rounds</span>
-                                <span class="summary-value" id="my-rounds-count">0</span>
-                            </div>
-                            <div class="summary-card">
-                                <span class="summary-label">Profit</span>
-                                <span class="summary-value" id="my-profit-val">$0.00</span>
-                            </div>
-                        </div>
-                        <div class="bets-table-container">
-                            <table class="bets-table">
-                                <thead>
-                                    <tr>
-                                        <th>Time</th>
-                                        <th>Bet</th>
-                                        <th>Mult.</th>
-                                        <th>Win</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="my-bets-list">
-                                    <!-- Player bet records -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Tab Panel: Chat -->
-                    <div class="tab-panel" id="panel-chat">
-                        <div class="chat-messages" id="chat-messages-container">
-                            <!-- Chat messages added by JS simulation -->
-                        </div>
-                        <form class="chat-input-area" id="chat-form">
-                            <input type="text" id="chat-input" placeholder="Send a message..." maxlength="100" required>
-                            <button type="submit" id="btn-chat-send" title="Send Message">
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Center Game Arena -->
-            <div class="game-arena">
-                <!-- Flight Canvas Area -->
-                <div class="canvas-card">
-                    <!-- Overlay screens -->
-                    <div class="canvas-overlay waiting-overlay" id="overlay-waiting">
-                        <div class="countdown-container">
-                            <span class="countdown-label">NEXT ROUND IN</span>
-                            <span class="countdown-timer" id="countdown-timer">5.0s</span>
-                            <div class="countdown-bar">
-                                <div class="countdown-bar-fill" id="countdown-bar-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="canvas-overlay crashed-overlay hidden" id="overlay-crashed">
-                        <div class="crash-container">
-                            <span class="crash-label">FLEW AWAY !</span>
-                            <span class="crash-value" id="crash-multiplier">2.45x</span>
-                        </div>
-                    </div>
-
-                    <div class="canvas-overlay active-overlay" id="overlay-active">
-                        <span class="current-multiplier" id="current-multiplier">1.00x</span>
-                    </div>
-
-                    <!-- Canvas -->
-                    <canvas id="flight-canvas"></canvas>
-                </div>
-
-                <!-- Dual Betting Panel Container -->
-                <div class="betting-dashboard">
-                    <!-- Betting Card A -->
-                    <div class="betting-card" id="betting-card-1">
-                        <div class="bet-tabs">
-                            <button class="bet-tab-btn active" data-mode="manual" id="card1-manual-tab">Bet</button>
-                            <button class="bet-tab-btn" data-mode="auto" id="card1-auto-tab">Auto</button>
-                        </div>
-                        
-                        <div class="bet-body">
-                            <!-- Left: Bet Value Config -->
-                            <div class="bet-config">
-                                <div class="number-input-group">
-                                    <button class="num-adjust-btn" id="card1-bet-minus" type="button"><i class="fa-solid fa-minus"></i></button>
-                                    <input class="bet-amount-input" id="card1-bet-amount" type="number" min="1" max="1000" step="1" value="10">
-                                    <button class="num-adjust-btn" id="card1-bet-plus" type="button"><i class="fa-solid fa-plus"></i></button>
-                                </div>
-                                <div class="quick-bet-grid">
-                                    <button class="quick-bet-btn" data-val="10">$10</button>
-                                    <button class="quick-bet-btn" data-val="50">$50</button>
-                                    <button class="quick-bet-btn" data-val="100">$100</button>
-                                    <button class="quick-bet-btn" data-val="500">$500</button>
-                                </div>
-                            </div>
-
-                            <!-- Right: Giant Bet CTA Button -->
-                            <div class="bet-action">
-                                <button class="action-btn bet-state" id="card1-action-btn">
-                                    <span class="btn-top-label">BET</span>
-                                    <span class="btn-main-val" id="card1-btn-amount">$10.00</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Auto configuration section (hidden by default unless active tab is 'auto') -->
-                        <div class="auto-panel-section hidden" id="card1-auto-panel">
-                            <div class="auto-row">
-                                <label class="checkbox-container">
-                                    <input type="checkbox" id="card1-auto-bet-toggle">
-                                    <span class="checkmark"></span>
-                                    Auto Bet
-                                </label>
-                                <div class="auto-cashout-group">
-                                    <label class="checkbox-container">
-                                        <input type="checkbox" id="card1-auto-cash-toggle">
-                                        <span class="checkmark"></span>
-                                        Auto Cash Out
-                                    </label>
-                                    <input class="auto-cashout-input" id="card1-auto-cash-value" type="number" min="1.01" max="1000" step="0.01" value="2.00" disabled>
-                                    <span class="auto-cashout-unit">x</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Betting Card B -->
-                    <div class="betting-card" id="betting-card-2">
-                        <div class="bet-tabs">
-                            <button class="bet-tab-btn active" data-mode="manual" id="card2-manual-tab">Bet</button>
-                            <button class="bet-tab-btn" data-mode="auto" id="card2-auto-tab">Auto</button>
-                        </div>
-                        
-                        <div class="bet-body">
-                            <!-- Left: Bet Value Config -->
-                            <div class="bet-config">
-                                <div class="number-input-group">
-                                    <button class="num-adjust-btn" id="card2-bet-minus" type="button"><i class="fa-solid fa-minus"></i></button>
-                                    <input class="bet-amount-input" id="card2-bet-amount" type="number" min="1" max="1000" step="1" value="20">
-                                    <button class="num-adjust-btn" id="card2-bet-plus" type="button"><i class="fa-solid fa-plus"></i></button>
-                                </div>
-                                <div class="quick-bet-grid">
-                                    <button class="quick-bet-btn" data-val="10">$10</button>
-                                    <button class="quick-bet-btn" data-val="50">$50</button>
-                                    <button class="quick-bet-btn" data-val="100">$100</button>
-                                    <button class="quick-bet-btn" data-val="500">$500</button>
-                                </div>
-                            </div>
-
-                            <!-- Right: Giant Bet CTA Button -->
-                            <div class="bet-action">
-                                <button class="action-btn bet-state" id="card2-action-btn">
-                                    <span class="btn-top-label">BET</span>
-                                    <span class="btn-main-val" id="card2-btn-amount">$20.00</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Auto configuration section (hidden by default unless active tab is 'auto') -->
-                        <div class="auto-panel-section hidden" id="card2-auto-panel">
-                            <div class="auto-row">
-                                <label class="checkbox-container">
-                                    <input type="checkbox" id="card2-auto-bet-toggle">
-                                    <span class="checkmark"></span>
-                                    Auto Bet
-                                </label>
-                                <div class="auto-cashout-group">
-                                    <label class="checkbox-container">
-                                        <input type="checkbox" id="card2-auto-cash-toggle">
-                                        <span class="checkmark"></span>
-                                        Auto Cash Out
-                                    </label>
-                                    <input class="auto-cashout-input" id="card2-auto-cash-value" type="number" min="1.01" max="1000" step="0.01" value="2.00" disabled>
-                                    <span class="auto-cashout-unit">x</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- MODAL: HOW TO PLAY -->
-    <div class="modal-overlay hidden" id="modal-rules">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-circle-question"></i> How to Play Aviator Rocket</h3>
-                <button class="modal-close-btn" id="btn-close-rules"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="modal-body">
-                <ol class="rules-list">
-                    <li>
-                        <strong>Place Your Bet:</strong> Adjust your bet amount in one or both of the betting panels and click the green <strong>"BET"</strong> button before the round begins.
-                    </li>
-                    <li>
-                        <strong>Watch the Rocket Take Off:</strong> As the round starts, the rocket climbs high, and the multiplier increases exponentially, starting from <strong>1.00x</strong>.
-                    </li>
-                    <li>
-                        <strong>Cash Out in Time:</strong> Press the orange <strong>"CASH OUT"</strong> button at any moment to secure your winning payout: your bet multiplied by the current flight multiplier.
-                    </li>
-                    <li>
-                        <strong>Avoid the Crash:</strong> If the rocket crashes ("FLEW AWAY") before you click Cash Out, you lose your bet. The crash point is determined by a random number generator before takeoff, making each flight completely unpredictable!
-                    </li>
-                    <li>
-                        <strong>Dual Betting & Auto Modes:</strong> Use the second betting panel to place a backup bet. Use the <strong>"Auto"</strong> tabs to configure automatic betting or automatic cashing out at a specified multiplier (e.g. 2.00x).
-                    </li>
-                </ol>
-                <div class="alert alert-info">
-                    <i class="fa-solid fa-circle-info"></i> This is a <strong>free demo mode simulator</strong>. No real currency is used. You can refill your balance anytime by clicking the "Refill" button in the header.
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="btn-rules-ok">Let's Play!</button>
-            </div>
+      <!-- Quick Search Bar -->
+      <div class="header-search-wrap">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Search for 'Red Bull', 'Keyboard', 'Steam Key', 'Thermal Paste'..." aria-label="Search gaming gear">
         </div>
-    </div>
+      </div>
 
-    <!-- MODAL: PROFILE & AVATAR SETTINGS -->
-    <div class="modal-overlay hidden" id="modal-profile">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-user-gear"></i> Player Profile</h3>
-                <button class="modal-close-btn" id="btn-close-profile"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="modal-body">
-                <div class="profile-editor">
-                    <div class="avatar-selection-area">
-                        <label class="modal-label">Choose Avatar</label>
-                        <div class="avatar-grid">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=RocketPilot1" alt="Avatar 1" class="avatar-option active" data-seed="RocketPilot1">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=CosmicFlyer" alt="Avatar 2" class="avatar-option" data-seed="CosmicFlyer">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=StarGazer" alt="Avatar 3" class="avatar-option" data-seed="StarGazer">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=NebulaRider" alt="Avatar 4" class="avatar-option" data-seed="NebulaRider">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=GalaxyCruiser" alt="Avatar 5" class="avatar-option" data-seed="GalaxyCruiser">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AstroCommander" alt="Avatar 6" class="avatar-option" data-seed="AstroCommander">
-                        </div>
-                    </div>
-                    <div class="username-field">
-                        <label class="modal-label" for="profile-username">Username</label>
-                        <input type="text" id="profile-username" value="Pilot_Demo" maxlength="15" required>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btn-profile-cancel">Cancel</button>
-                <button class="btn btn-primary" id="btn-profile-save">Save Changes</button>
-            </div>
+      <!-- Action Buttons -->
+      <div class="header-right">
+        <button class="login-btn" id="login-button">Login</button>
+        <button class="header-cart-btn" id="cart-btn" aria-label="Open shopping cart">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-details-wrap">
+            <span class="cart-btn-label">My Cart</span>
+            <span class="cart-summary"><span id="cart-count">0</span> items • <span id="cart-amount">₹0</span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-content">
+    
+    <!-- Hero Banner Slider -->
+    <section class="promo-section" aria-label="Promotional banners">
+      <div class="promo-banner">
+        <div class="banner-content">
+          <span class="banner-tag">⚡ INSTANT STORE</span>
+          <h2>Gamer Fuel & Gear in 10 Minutes!</h2>
+          <p>Running out of energy during a match? Need fresh thermal paste? Ranjan Drone-X1 will deliver it to your desk instantly.</p>
+          <div class="banner-highlight">💥 Free Delivery on orders above ₹499</div>
         </div>
+        <div class="banner-visual">
+          <!-- A sleek futuristic vector design using SVGs directly in styles -->
+          <div class="floating-drone-wrapper">
+            <svg viewBox="0 0 100 100" class="banner-drone-svg">
+              <path d="M 20 50 L 80 50 M 50 30 L 50 70" stroke="#00ffcc" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="50" cy="50" r="14" fill="#111" stroke="#ff00ff" stroke-width="3"/>
+              <circle cx="20" cy="50" r="8" fill="#111" stroke="#00ffcc" stroke-width="2"/>
+              <circle cx="80" cy="50" r="8" fill="#111" stroke="#00ffcc" stroke-width="2"/>
+              <circle cx="50" cy="30" r="6" fill="#111" stroke="#ffff00" stroke-width="2"/>
+              <circle cx="50" cy="70" r="6" fill="#111" stroke="#ffff00" stroke-width="2"/>
+              <path d="M 12 45 L 28 45 M 72 45 L 88 45" stroke="#fff" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Navigation Tab Bar -->
+    <section class="categories-section" aria-label="Product categories">
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="categories-scroll" id="categories-tabs">
+        <button class="category-chip active" data-category="all" id="cat-all">All Gear</button>
+        <button class="category-chip" data-category="drinks" id="cat-drinks">🥤 Energy & Drinks</button>
+        <button class="category-chip" data-category="accessories" id="cat-accessories">⌨️ Keyboards & Mice</button>
+        <button class="category-chip" data-category="hardware" id="cat-hardware">🔧 Hardware & Paste</button>
+        <button class="category-chip" data-category="keys" id="cat-keys">🎟️ Digital Cards</button>
+        <button class="category-chip" data-category="snacks" id="cat-snacks">🍟 Gamer Snacks</button>
+        <button class="category-chip" data-category="console" id="cat-console">🎮 Console Upgrades</button>
+      </div>
+    </section>
+
+    <!-- Product Grid Catalog -->
+    <section class="products-section" aria-label="Products list">
+      <h2 class="section-title">Fresh Stock Delivered Instantly</h2>
+      <div class="products-grid" id="products-grid">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Mobile Cart Bar -->
+  <div class="sticky-cart-bar" id="sticky-cart-bar-mobile">
+    <div class="sticky-cart-info">
+      <span class="sticky-cart-qty"><span id="cart-count-mobile">0</span> Item(s)</span>
+      <span class="sticky-cart-total"><span id="cart-amount-mobile">₹0</span></span>
+    </div>
+    <button class="sticky-view-cart-btn" id="cart-btn-mobile">
+      View Cart <span>🛒</span>
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>RANJAN GAMER</h3>
+        <p>Blinkit-style hyper-local instant delivery for PC and Console gamers. Built for maximum speed.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Popular Categories</h4>
+        <ul>
+          <li><a href="#cat-drinks">Energy Drinks</a></li>
+          <li><a href="#cat-accessories">Mechanical Keyboards</a></li>
+          <li><a href="#cat-keys">Steam Gift Cards</a></li>
+          <li><a href="#cat-hardware">PC Cooling Fans</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Ranjan Gamer Delivery. Delivered in 10 minutes by high-speed delivery drones.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shopping Cart Drawer Slider Overlay -->
+  <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <h2 id="cart-title">My Cart</h2>
+      <button class="close-cart-btn" id="close-cart" aria-label="Close cart">✕</button>
     </div>
 
-    <!-- Notification Toast -->
-    <div class="toast hidden" id="toast-notification">
-        <i class="fa-solid fa-circle-check toast-icon"></i>
-        <span class="toast-message" id="toast-message-text">Bet placed successfully!</span>
+    <!-- Empty Cart View -->
+    <div class="cart-empty-state" id="empty-cart-view">
+      <div class="empty-cart-icon">🛒</div>
+      <h3>Your cart is empty</h3>
+      <p>No gaming gear added yet. Fill your cart with energy drinks and accessories to start playing!</p>
     </div>
 
-    <!-- Script imports -->
-    <script src="audio.js"></script>
-    <script src="game.js"></script>
-    <script src="ui.js"></script>
+    <!-- Filled Cart View -->
+    <div class="cart-filled-state" id="filled-cart-view" style="display: none;">
+      <!-- Free Delivery Progress Meter -->
+      <div class="free-delivery-meter">
+        <p class="meter-text" id="progress-text">Add items worth ₹250 more to get FREE delivery</p>
+        <div class="meter-track">
+          <div class="meter-fill" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Items List Container -->
+      <div class="cart-items-list" id="cart-items">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+      <!-- Bill Details breakdown -->
+      <div class="bill-details-section">
+        <h3>Bill Details</h3>
+        <div class="bill-row">
+          <span>Items Total</span>
+          <span id="bill-subtotal">₹0</span>
+        </div>
+        <div class="bill-row">
+          <span>Delivery Partner Fee</span>
+          <span id="bill-delivery">₹25</span>
+        </div>
+        <div class="bill-row">
+          <span>Gamer Handling Charge</span>
+          <span id="bill-handling">₹4</span>
+        </div>
+        <hr class="bill-divider">
+        <div class="bill-row grand-total-row">
+          <span>Grand Total</span>
+          <span id="bill-grandtotal">₹0</span>
+        </div>
+      </div>
+
+      <!-- Checkout CTA Panel -->
+      <div class="cart-checkout-panel">
+        <button class="checkout-submit-btn" id="checkout-btn">
+          <span class="checkout-amount-side">
+            <span class="checkout-val" id="checkout-total">₹0</span>
+            <span class="checkout-lbl">GRAND TOTAL</span>
+          </span>
+          <span class="checkout-action-text">Place Order ➔</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Live Drone Delivery Tracking Portal Overlay -->
+  <div class="tracker-portal" id="tracker-portal">
+    <div class="tracker-card">
+      <div class="tracker-header">
+        <div class="tracker-logo">🛸 RANJAN DRONE-X1</div>
+        <div class="tracker-eta">
+          <span class="eta-label">Arriving In</span>
+          <span class="eta-timer" id="tracker-timer">10:00</span>
+        </div>
+      </div>
+      
+      <!-- Simulated Interactive Map -->
+      <div class="map-container" id="drone-map">
+        <!-- Radial Scanning Grid Background -->
+        <div class="map-grid"></div>
+        
+        <!-- Source Hub Point -->
+        <div class="map-point hub-point" style="left: 15%; top: 70%;">
+          <span class="point-glow"></span>
+          <span class="point-label">Ranjan HQ</span>
+        </div>
+
+        <!-- Destination Den Point -->
+        <div class="map-point den-point" style="left: 80%; top: 20%;">
+          <span class="point-glow pulse"></span>
+          <span class="point-label">Your Den</span>
+        </div>
+
+        <!-- Flight Path Polyline SVG -->
+        <svg class="map-path-svg">
+          <line x1="15%" y1="70%" x2="80%" y2="20%" stroke="#00ffcc" stroke-width="2" stroke-dasharray="6,4" class="path-line"/>
+        </svg>
+
+        <!-- Drone Icon flying along the path -->
+        <div class="drone-flyer" id="drone-icon" style="left: 15%; top: 70%;">
+          🛸
+          <span class="drone-glow"></span>
+        </div>
+      </div>
+
+      <!-- Order Status Timeline Checklist -->
+      <div class="tracker-timeline-section">
+        <h3>Delivery Checklist</h3>
+        <div class="tracker-status-list" id="tracker-status-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Delivery Partner Navigation (Google Maps Redirect) -->
+      <div class="tracker-partner-nav-section">
+        <div class="partner-card-header">
+          <span class="partner-rider-emoji">🛵</span>
+          <div class="partner-meta-details">
+            <h4>Rider Navigation Link</h4>
+            <p>Direct Google Maps route to your coordinates</p>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=28.6139,77.2090" id="delivery-google-maps-link" target="_blank" class="maps-nav-btn">
+          🗺️ Open Google Maps Route for Rider
+        </a>
+      </div>
+
+      <!-- Bottom action button -->
+      <div class="tracker-footer">
+        <button class="tracker-close-btn" id="close-tracker-btn" disabled>Drone En-Route...</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Location Selector Modal (Full-Screen Layout) -->
+  <div class="location-modal-overlay" id="location-modal-overlay"></div>
+  <div class="location-modal fullscreen" id="location-modal" role="dialog" aria-labelledby="location-modal-title" aria-modal="true">
+    <div class="location-modal-header">
+      <h2 id="location-modal-title">Select Delivery Location</h2>
+      <button class="close-location-btn" id="close-location-modal" aria-label="Close location selector">✕ Close</button>
+    </div>
+    <div class="location-modal-body">
+      <!-- Fullscreen GPS target confirm area (Leaflet Map) -->
+      <div class="location-target-section">
+        <div class="map-wrapper-fullscreen">
+          <div id="location-map"></div>
+          <!-- Custom central pin overlay like Uber/Rapido -->
+          <div class="map-center-pin">📍</div>
+        </div>
+        
+        <div class="address-display-card">
+          <span class="addr-badge">DELIVERY PIN LOCATION</span>
+          <div class="addr-text-live" id="live-map-address">Locating your den coordinates...</div>
+        </div>
+
+        <button class="detect-gps-btn-fullscreen" id="detect-gps-btn">
+          <span class="gps-main-lbl">Confirm Location Pin ➔</span>
+          <span class="gps-status-lbl" id="gps-status-text">Save this map position as your delivery den</span>
+          <span class="gps-spinner" id="gps-spinner" style="display: none;"></span>
+        </button>
+
+        <button class="gps-recenter-btn" id="gps-recenter-btn">
+          🎯 Recenter GPS Location
+        </button>
+        
+        <!-- Live Google Maps Coords Verification -->
+        <div class="google-maps-verify-wrap" id="google-maps-verify-wrap" style="display: none;">
+          <a href="#" id="verify-on-google-maps" target="_blank" class="verify-maps-link">
+            🗺️ Open Google Maps Route Navigation
+          </a>
+        </div>
+      </div>
+
+      <div class="location-input-section">
+        <div class="modal-divider-text">OR ENTER ADDRESS MANUALLY</div>
+
+        <!-- Manual Input -->
+        <div class="manual-address-input-wrap">
+          <input type="text" id="manual-address-input" placeholder="Type room, block, or building address..." aria-label="Manual address input">
+          <button class="save-address-btn" id="save-address-btn">Save Address</button>
+        </div>
+
+        <div class="modal-divider-text">POPULAR DEN LOCATIONS</div>
+
+        <!-- Quick Addresses -->
+        <div class="quick-addresses-list">
+          <button class="quick-addr-item" data-address="🎮 Gamer Lounge, Cyber St, Sector 7">
+            <span class="addr-icon">🎮</span>
+            <span class="addr-details">
+              <span class="addr-title">Gaming Lounge</span>
+              <span class="addr-desc">Sector 7, Cyber Street</span>
+            </span>
+          </button>
+          <button class="quick-addr-item" data-address="🏢 Esports Arena, Suite 10, Alpha Tower">
+            <span class="addr-icon">🏢</span>
+            <span class="addr-details">
+              <span class="addr-title">Esports Arena</span>
+              <span class="addr-desc">Alpha Tower, Cyber City</span>
+            </span>
+          </button>
+          <button class="quick-addr-item" data-address="🏫 Hostel Room 204, Block-C, IIT Delhi">
+            <span class="addr-icon">🏫</span>
+            <span class="addr-details">
+              <span class="addr-title">Gamer Hostel</span>
+              <span class="addr-desc">Room 204, Block-C, IIT Delhi</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>

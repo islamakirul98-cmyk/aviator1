@@ -32,9 +32,9 @@ while ($listener.IsListening) {
             # Content-Type Mapping
             switch ($ext) {
                 ".html" { $response.ContentType = "text/html; charset=utf-8" }
-                ".css"  { $response.ContentType = "text/css" }
-                ".js"   { $response.ContentType = "application/javascript" }
-                ".svg"  { $response.ContentType = "image/svg+xml" }
+                ".css"  { $response.ContentType = "text/css; charset=utf-8" }
+                ".js"   { $response.ContentType = "application/javascript; charset=utf-8" }
+                ".svg"  { $response.ContentType = "image/svg+xml; charset=utf-8" }
                 ".png"  { $response.ContentType = "image/png" }
                 ".jpg"  { $response.ContentType = "image/jpeg" }
                 default { $response.ContentType = "application/octet-stream" }
