@@ -1,816 +1,1295 @@
-// Products data with customized gaming SVG icons and Blinkit style properties
-const PRODUCTS = [
-  {
-    id: 'p1',
-    name: 'Monster Gamer Energy Drink (Can)',
-    price: 110,
-    originalPrice: 150,
-    category: 'drinks',
-    time: '7 mins',
-    rating: '4.9',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-energy" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00ff87"/><stop offset="100%" stop-color="#60efff"/></linearGradient></defs><rect x="35" y="15" width="30" height="70" rx="6" fill="url(#g-energy)"/><rect x="42" y="10" width="16" height="5" fill="#333"/><path d="M 50 25 L 40 45 L 60 45 L 50 75" stroke="#111" stroke-width="4" fill="none" stroke-linejoin="round"/></svg>`
-  },
-  {
-    id: 'p2',
-    name: 'HyperX Mechanical Keyboard RGB',
-    price: 3499,
-    originalPrice: 4999,
-    category: 'accessories',
-    time: '12 mins',
-    rating: '4.8',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-kbd" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff007f"/><stop offset="100%" stop-color="#7f00ff"/></linearGradient></defs><rect x="15" y="30" width="70" height="40" rx="4" fill="#222" stroke="url(#g-kbd)" stroke-width="3"/><rect x="20" y="35" width="8" height="8" rx="1" fill="#ff007f"/><rect x="30" y="35" width="8" height="8" rx="1" fill="#7f00ff"/><rect x="40" y="35" width="8" height="8" rx="1" fill="#00E676"/><rect x="50" y="35" width="8" height="8" rx="1" fill="#F9E300"/><rect x="60" y="35" width="8" height="8" rx="1" fill="#ff007f"/><rect x="70" y="35" width="8" height="8" rx="1" fill="#7f00ff"/><rect x="20" y="47" width="8" height="8" rx="1" fill="#7f00ff"/><rect x="30" y="47" width="28" height="8" rx="1" fill="#00e5ff"/><rect x="62" y="47" width="8" height="8" rx="1" fill="#ff007f"/><rect x="72" y="47" width="8" height="8" rx="1" fill="#F9E300"/><rect x="20" y="59" width="60" height="6" rx="1" fill="#333"/></svg>`
-  },
-  {
-    id: 'p3',
-    name: 'Logitech G Lightspeed Mouse',
-    price: 1899,
-    originalPrice: 2499,
-    category: 'accessories',
-    time: '9 mins',
-    rating: '4.7',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-mouse" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#00ff87"/></linearGradient></defs><path d="M 50 15 C 35 15, 30 35, 30 55 C 30 75, 40 85, 50 85 C 60 85, 70 75, 70 55 C 70 35, 65 15, 50 15 Z" fill="#222" stroke="url(#g-mouse)" stroke-width="3"/><path d="M 50 15 L 50 45 M 30 45 L 70 45" stroke="url(#g-mouse)" stroke-width="1.5"/><rect x="47" y="25" width="6" height="12" rx="3" fill="#00ff87"/></svg>`
-  },
-  {
-    id: 'p4',
-    name: 'Steam $10 Wallet Gift Card',
-    price: 850,
-    originalPrice: 900,
-    category: 'keys',
-    time: '5 mins',
-    rating: '4.9',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-steam" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1b2838"/><stop offset="100%" stop-color="#2a475e"/></linearGradient></defs><rect x="15" y="25" width="70" height="50" rx="6" fill="url(#g-steam)" stroke="#00e5ff" stroke-width="1.5"/><circle cx="50" cy="50" r="14" fill="#171a21"/><path d="M 43 57 L 57 43" stroke="#00e5ff" stroke-width="4" stroke-linecap="round"/><circle cx="43" cy="57" r="4" fill="#00e5ff"/><circle cx="57" cy="43" r="5" fill="#2a475e" stroke="#00e5ff" stroke-width="2"/></svg>`
-  },
-  {
-    id: 'p5',
-    name: 'Valorant 1000 VP Instant Code',
-    price: 799,
-    originalPrice: 850,
-    category: 'keys',
-    time: '5 mins',
-    rating: '4.8',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-val" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff4655"/><stop offset="100%" stop-color="#ff7f7f"/></linearGradient></defs><rect x="15" y="25" width="70" height="50" rx="6" fill="#111" stroke="url(#g-val)" stroke-width="2"/><path d="M 40 35 L 48 35 L 60 55 L 52 55 Z M 48 55 L 60 35" stroke="url(#g-val)" stroke-width="4" stroke-linecap="round" fill="none"/></svg>`
-  },
-  {
-    id: 'p6',
-    name: 'Doritos Gamer Spicy Nachos',
-    price: 90,
-    originalPrice: 100,
-    category: 'snacks',
-    time: '8 mins',
-    rating: '4.6',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-chips" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff3300"/><stop offset="100%" stop-color="#ff9900"/></linearGradient></defs><path d="M 30 15 L 70 15 L 75 85 L 25 85 Z" fill="url(#g-chips)"/><path d="M 40 40 L 60 40 L 50 65 Z" fill="#ffcc00" stroke="#fff" stroke-width="1"/></svg>`
-  },
-  {
-    id: 'p7',
-    name: 'Xbox Game Pass 1-Month Code',
-    price: 489,
-    originalPrice: 549,
-    category: 'keys',
-    time: '5 mins',
-    rating: '4.9',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-xbox" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#107c10"/><stop offset="100%" stop-color="#23bc23"/></linearGradient></defs><rect x="15" y="25" width="70" height="50" rx="6" fill="url(#g-xbox)" stroke="#fff" stroke-width="1.5"/><circle cx="50" cy="50" r="16" fill="#111"/><path d="M 40 42 C 43 45, 57 45, 60 42 C 55 45, 45 45, 40 42 Z" fill="#fff"/><path d="M 38 45 C 42 55, 58 55, 62 45 C 55 58, 45 58, 38 45 Z" fill="#fff"/></svg>`
-  },
-  {
-    id: 'p8',
-    name: '120mm RGB Cabinet Fan (1 unit)',
-    price: 499,
-    originalPrice: 799,
-    category: 'hardware',
-    time: '14 mins',
-    rating: '4.5',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-fan" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f2fe"/><stop offset="100%" stop-color="#4facfe"/></linearGradient></defs><rect x="20" y="20" width="60" height="60" rx="6" fill="none" stroke="url(#g-fan)" stroke-width="4"/><circle cx="50" cy="50" r="24" fill="none" stroke="url(#g-fan)" stroke-width="2" stroke-dasharray="4,2"/><circle cx="50" cy="50" r="8" fill="url(#g-fan)"/><path d="M 50 26 C 45 35, 45 45, 50 42 C 55 45, 55 35, 50 26 Z M 50 74 C 45 65, 45 55, 50 58 C 55 55, 55 65, 50 74 Z" fill="url(#g-fan)"/><path d="M 26 50 C 35 45, 45 45, 42 50 C 45 55, 35 55, 26 50 Z M 74 50 C 65 45, 55 45, 58 50 C 55 55, 65 55, 74 50 Z" fill="url(#g-fan)"/></svg>`
-  },
-  {
-    id: 'p9',
-    name: 'Noctua NT-H1 Thermal Paste',
-    price: 649,
-    originalPrice: 899,
-    category: 'hardware',
-    time: '10 mins',
-    rating: '4.9',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><path d="M 30 75 L 70 35" stroke="#888" stroke-width="8" stroke-linecap="round"/><path d="M 20 85 L 35 70" stroke="#555" stroke-width="5"/><path d="M 65 40 L 75 30" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/><path d="M 72 33 L 80 25" stroke="#f00" stroke-width="4"/><rect x="35" y="45" width="20" height="10" rx="2" fill="#d2691e" transform="rotate(-45 45 50)"/></svg>`
-  },
-  {
-    id: 'p10',
-    name: 'Kingston Fury 16GB DDR5 RAM',
-    price: 4599,
-    originalPrice: 5999,
-    category: 'hardware',
-    time: '15 mins',
-    rating: '4.8',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-ram" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff00cc"/><stop offset="100%" stop-color="#3333ff"/></linearGradient></defs><rect x="10" y="38" width="80" height="24" rx="2" fill="#222" stroke="url(#g-ram)" stroke-width="3"/><rect x="15" y="62" width="70" height="4" fill="#d4af37" stroke-dasharray="2,1"/><rect x="20" y="44" width="12" height="12" fill="#444"/><rect x="36" y="44" width="12" height="12" fill="#444"/><rect x="52" y="44" width="12" height="12" fill="#444"/><rect x="68" y="44" width="12" height="12" fill="#444"/><rect x="12" y="40" width="76" height="2" fill="#00ffcc"/></svg>`
-  },
-  {
-    id: 'p11',
-    name: 'Pro Silicon Thumb Grips (Set of 4)',
-    price: 199,
-    originalPrice: 399,
-    category: 'console',
-    time: '9 mins',
-    rating: '4.4',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><circle cx="35" cy="35" r="16" fill="#111" stroke="#ff0055" stroke-width="3"/><circle cx="35" cy="35" r="6" fill="#ff0055" stroke-dasharray="2,2"/><circle cx="65" cy="35" r="16" fill="#111" stroke="#00ffcc" stroke-width="3"/><circle cx="65" cy="35" r="6" fill="#00ffcc" stroke-dasharray="2,2"/><circle cx="35" cy="65" r="16" fill="#111" stroke="#ffcc00" stroke-width="3"/><circle cx="35" cy="65" r="6" fill="#ffcc00" stroke-dasharray="2,2"/><circle cx="65" cy="65" r="16" fill="#111" stroke="#ff00ff" stroke-width="3"/><circle cx="65" cy="65" r="6" fill="#ff00ff" stroke-dasharray="2,2"/></svg>`
-  },
-  {
-    id: 'p12',
-    name: 'Gamer Neon Fuel Thermos Flask',
-    price: 699,
-    originalPrice: 999,
-    category: 'drinks',
-    time: '11 mins',
-    rating: '4.7',
-    svg: `<svg viewBox="0 0 100 100" class="prod-svg"><defs><linearGradient id="g-mug" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#9d00ff"/><stop offset="100%" stop-color="#ff007f"/></linearGradient></defs><rect x="35" y="25" width="30" height="55" rx="10" fill="url(#g-mug)"/><path d="M 65 35 C 75 35, 75 65, 65 65" fill="none" stroke="url(#g-mug)" stroke-width="6" stroke-linecap="round"/><rect x="42" y="20" width="16" height="5" rx="2" fill="#333"/><circle cx="50" cy="52" r="8" fill="#111"/><path d="M 47 52 L 53 52 M 50 49 L 50 55" stroke="#ff007f" stroke-width="2"/></svg>`
+/* ==========================================================================
+   PANDYA BET - GAME LOGIC, STATES, & AUDIO ENGINE
+   ========================================================================== */
+
+// --- Audio Synthesizer Engine (Using Web Audio API - Zero External Assets) ---
+let audioCtx = null;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
-];
+}
 
-// App State
-let cart = {}; // format: { productId: quantity }
-let currentCategory = 'all';
-let searchQuery = '';
-let currentCoordinates = { lat: 28.6139, lon: 77.2090 }; // default Delhi coordinates
+// Play simple synth sound with flexible oscillators
+function playSynthSound(freq, type, duration, gainValue = 0.1, stopDelay = 0) {
+  if (!window.soundEnabled) return;
+  initAudio();
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
 
-// DOM Elements
-const productsGrid = document.getElementById('products-grid');
-const categoryChips = document.querySelectorAll('.category-chip');
-const searchInput = document.getElementById('search-input');
-const cartBtn = document.getElementById('cart-btn');
-const cartBtnMobile = document.getElementById('cart-btn-mobile');
-const cartCount = document.getElementById('cart-count');
-const cartCountMobile = document.getElementById('cart-count-mobile');
-const cartAmount = document.getElementById('cart-amount');
-const cartAmountMobile = document.getElementById('cart-amount-mobile');
-const cartDrawer = document.getElementById('cart-drawer');
-const cartOverlay = document.getElementById('cart-overlay');
-const closeCart = document.getElementById('close-cart');
-const cartItemsContainer = document.getElementById('cart-items');
-const emptyCartView = document.getElementById('empty-cart-view');
-const filledCartView = document.getElementById('filled-cart-view');
-const checkoutTotal = document.getElementById('checkout-total');
-const progressText = document.getElementById('progress-text');
-const progressBar = document.getElementById('progress-bar');
-const checkoutBtn = document.getElementById('checkout-btn');
+  const osc = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
 
-// Bill details elements
-const subtotalEl = document.getElementById('bill-subtotal');
-const deliveryFeeEl = document.getElementById('bill-delivery');
-const handlingFeeEl = document.getElementById('bill-handling');
-const grandTotalEl = document.getElementById('bill-grandtotal');
+  osc.type = type; // 'sine', 'square', 'sawtooth', 'triangle'
+  osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+  
+  gainNode.gain.setValueAtTime(gainValue, audioCtx.currentTime);
+  // Linear decay ramp
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
 
-// Delivery Tracking Screen Elements
-const trackerPortal = document.getElementById('tracker-portal');
-const droneMap = document.getElementById('drone-map');
-const droneIcon = document.getElementById('drone-icon');
-const trackerTimer = document.getElementById('tracker-timer');
-const trackerStatusList = document.getElementById('tracker-status-list');
-const closeTrackerBtn = document.getElementById('close-tracker-btn');
+  osc.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
 
-// Location Modal Elements
-const locationSelector = document.getElementById('location-selector');
-const locationModal = document.getElementById('location-modal');
-const locationModalOverlay = document.getElementById('location-modal-overlay');
-const closeLocationModal = document.getElementById('close-location-modal');
-const detectGpsBtn = document.getElementById('detect-gps-btn');
-const gpsStatusText = document.getElementById('gps-status-text');
-const gpsSpinner = document.getElementById('gps-spinner');
-const manualAddressInput = document.getElementById('manual-address-input');
-const saveAddressBtn = document.getElementById('save-address-btn');
-const quickAddrItems = document.querySelectorAll('.quick-addr-item');
-const currentLocationText = document.getElementById('current-location-text');
+  osc.start(audioCtx.currentTime + stopDelay);
+  osc.stop(audioCtx.currentTime + duration + stopDelay);
+}
 
-// Google Maps Integration Elements
-const googleMapsVerifyWrap = document.getElementById('google-maps-verify-wrap');
-const verifyOnGoogleMaps = document.getElementById('verify-on-google-maps');
-const deliveryGoogleMapsLink = document.getElementById('delivery-google-maps-link');
+// Customized Audio Triggers
+function playTickSound() {
+  playSynthSound(880, 'sine', 0.05, 0.08); // High click beep
+}
 
-// Interactive Leaflet Map variables
-const liveMapAddress = document.getElementById('live-map-address');
-const gpsRecenterBtn = document.getElementById('gps-recenter-btn');
-let leafletMap = null;
-let tempSelectedAddressText = '';
+function playLockSound() {
+  playSynthSound(220, 'triangle', 0.2, 0.15); // Low blunt sound
+}
 
-// Initialize Website
+function playWinSound() {
+  // Arpeggio
+  const now = 0.08;
+  playSynthSound(523.25, 'triangle', 0.2, 0.12); // C5
+  playSynthSound(659.25, 'triangle', 0.2, 0.12, now); // E5
+  playSynthSound(783.99, 'triangle', 0.2, 0.12, now * 2); // G5
+  playSynthSound(1046.50, 'sine', 0.35, 0.15, now * 3); // C6 (Victory)
+}
+
+function playLoseSound() {
+  // Sliding down sound
+  if (!window.soundEnabled) return;
+  initAudio();
+  const osc = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(293.66, audioCtx.currentTime); // D4
+  osc.frequency.linearRampToValueAtTime(110.00, audioCtx.currentTime + 0.4); // A2
+  
+  gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+  
+  osc.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.4);
+}
+
+// Jet Engine noise simulation for Aviator
+let jetNode = null;
+let jetOsc = null;
+
+function startJetEngineSound() {
+  if (!window.soundEnabled) return;
+  initAudio();
+  
+  try {
+    jetOsc = audioCtx.createOscillator();
+    jetNode = audioCtx.createGain();
+    
+    jetOsc.type = 'sawtooth';
+    jetOsc.frequency.setValueAtTime(80, audioCtx.currentTime); // Low engine hum
+    
+    jetNode.gain.setValueAtTime(0.02, audioCtx.currentTime); // Soft volume
+    
+    jetOsc.connect(jetNode);
+    jetNode.connect(audioCtx.destination);
+    jetOsc.start();
+  } catch (e) {
+    console.warn("Audio node init failed:", e);
+  }
+}
+
+function updateJetEnginePitch(multiplier) {
+  if (jetOsc && audioCtx) {
+    // Pitch increases with the flying multiplier
+    const targetFreq = 80 + (multiplier * 45);
+    jetOsc.frequency.setValueAtTime(targetFreq, audioCtx.currentTime);
+    
+    // Gain increases slightly as plane flies higher
+    const targetGain = Math.min(0.02 + (multiplier * 0.008), 0.08);
+    jetNode.gain.setValueAtTime(targetGain, audioCtx.currentTime);
+  }
+}
+
+function stopJetEngineSound(isCrash = false) {
+  if (jetOsc) {
+    try {
+      jetOsc.stop();
+      jetOsc.disconnect();
+    } catch(e) {}
+    jetOsc = null;
+  }
+  
+  if (isCrash) {
+    // Play explosion sound effect (Low noise burst)
+    playSynthSound(60, 'sawtooth', 0.65, 0.25);
+    playSynthSound(90, 'triangle', 0.45, 0.2);
+  }
+}
+
+
+// --- Global Application States ---
+window.soundEnabled = true;
+let walletBalance = parseFloat(localStorage.getItem('pandya_wallet_bal') || '1000.00');
+let activeScreen = 'lobby';
+
+// Win Go (Color Prediction) States
+let wingoPeriodId = parseInt(localStorage.getItem('pandya_wingo_period') || '202607101001');
+let wingoSecondsRemaining = 60;
+let wingoTimerId = null;
+let wingoBetsPlaced = []; // Tracks current round bets: [{ type: 'color'/'number'/'size', selection: 'Red'/3, totalBet: 100 }]
+let wingoHistory = JSON.parse(localStorage.getItem('pandya_wingo_history') || '[]');
+let userWingoBetsHistory = JSON.parse(localStorage.getItem('pandya_user_wingo_history') || '[]');
+
+// Bet Selection Drawer details state
+let currentBetDrawerType = ''; // 'color', 'number', 'size'
+let currentBetDrawerSelection = null; // e.g. 'Green', 5, 'Big'
+let currentBetBaseAmount = 1;
+let currentBetMultiplier = 1;
+
+// Aviator Game States
+let aviatorState = 'waiting'; // 'waiting', 'flying', 'crashed'
+let aviatorMultiplier = 1.00;
+let aviatorTimeElapsed = 0;
+let aviatorCrashLimit = 1.50;
+let aviatorHistory = [1.24, 2.50, 1.08, 12.44, 1.95, 3.80, 1.15, 6.40, 2.10, 1.55];
+let aviatorBets = {
+  left: { amount: 100, placed: false, cashoutAmt: 0, win: false },
+  right: { amount: 200, placed: false, cashoutAmt: 0, win: false }
+};
+let aviatorCanvas = null;
+let aviatorCtx = null;
+let aviatorAnimId = null;
+let aviatorWaitTimer = 5; // seconds to countdown before takeoff
+
+// Deposit details state
+let selectedDepositMethod = 'UPI Fast';
+let selectedDepositAmountPreset = 500;
+
+// DOM variables cache
+let userBalanceEl, screenLobby, screenWingo, screenAviator, soundToggleBtn;
+
+
+// --- DOM Ready Entrypoint ---
 document.addEventListener('DOMContentLoaded', () => {
-  renderProducts();
-  setupEventListeners();
-  updateCartUI();
+  // Cache selector nodes
+  userBalanceEl = document.getElementById('user-balance');
+  screenLobby = document.getElementById('screen-lobby');
+  screenWingo = document.getElementById('screen-wingo');
+  screenAviator = document.getElementById('screen-aviator');
+  soundToggleBtn = document.getElementById('sound-toggle-btn');
+  
+  // Set initial UI elements
+  updateBalanceUI();
+  initSoundToggleButton();
+  
+  // Start active game engines
+  startWingoCountdownEngine();
+  startWinnersTickerFeed();
+  
+  // Pre-fill history list with dummy outcomes if storage is empty
+  if (wingoHistory.length === 0) {
+    generateMockWingoHistory();
+  } else {
+    renderWingoHistoryList();
+  }
+  
+  renderUserWingoBetsList();
+  
+  // Initialize Aviator history badges
+  renderAviatorHistoryBadges();
 });
 
-// Setup Event Listeners
-function setupEventListeners() {
-  // Category Filtering
-  categoryChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      categoryChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      currentCategory = chip.dataset.category;
-      renderProducts();
-    });
-  });
 
-  // Search Input
-  searchInput.addEventListener('input', (e) => {
-    searchQuery = e.target.value.toLowerCase().trim();
-    renderProducts();
-  });
-
-  // Open Cart Drawer
-  cartBtn.addEventListener('click', toggleCart);
-  if (cartBtnMobile) {
-    cartBtnMobile.addEventListener('click', toggleCart);
+// --- General UI helpers ---
+function updateBalanceUI() {
+  if (userBalanceEl) {
+    userBalanceEl.textContent = walletBalance.toFixed(2);
   }
-
-  // Close Cart Drawer
-  closeCart.addEventListener('click', toggleCart);
-  cartOverlay.addEventListener('click', toggleCart);
-
-  // Checkout / Place Order Button
-  checkoutBtn.addEventListener('click', startOrderCheckout);
-
-  // Close Tracker Portal
-  closeTrackerBtn.addEventListener('click', closeTracker);
-
-  // Location modal event listeners
-  locationSelector.addEventListener('click', toggleLocationModal);
-  closeLocationModal.addEventListener('click', toggleLocationModal);
-  locationModalOverlay.addEventListener('click', toggleLocationModal);
-  detectGpsBtn.addEventListener('click', confirmPinLocation);
-  if (gpsRecenterBtn) {
-    gpsRecenterBtn.addEventListener('click', recenterMapToGPS);
+  const withdrawBalEl = document.getElementById('withdraw-avail-bal');
+  if (withdrawBalEl) {
+    withdrawBalEl.textContent = `₹${walletBalance.toFixed(2)}`;
   }
-  saveAddressBtn.addEventListener('click', saveManualAddress);
-  manualAddressInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') saveManualAddress();
-  });
-  quickAddrItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const address = item.dataset.address;
-      currentLocationText.textContent = address;
-      
-      // Preset coordinates depending on pre-configured gamer addresses
-      if (address.includes('Lounge')) {
-        currentCoordinates = { lat: 28.6200, lon: 77.2100 };
-      } else if (address.includes('Arena')) {
-        currentCoordinates = { lat: 28.6300, lon: 77.2200 };
-      } else if (address.includes('Hostel')) {
-        currentCoordinates = { lat: 28.6400, lon: 77.2300 };
-      }
-      
-      // Update Leaflet map view if open
-      if (leafletMap) {
-        leafletMap.setView([currentCoordinates.lat, currentCoordinates.lon], 15);
-        reverseGeocodeCoords(currentCoordinates.lat, currentCoordinates.lon);
-      }
-      
-      if (googleMapsVerifyWrap) googleMapsVerifyWrap.style.display = 'none';
-      toggleLocationModal();
-    });
-  });
+  localStorage.setItem('pandya_wallet_bal', walletBalance.toString());
 }
 
-// Toggle Cart Drawer
-function toggleCart() {
-  cartDrawer.classList.toggle('open');
-  cartOverlay.classList.toggle('open');
+function initSoundToggleButton() {
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', () => {
+      window.soundEnabled = !window.soundEnabled;
+      soundToggleBtn.innerHTML = window.soundEnabled ? '<span class="icon">🔊</span>' : '<span class="icon">🔇</span>';
+      
+      // Request audio context resume on click
+      if (window.soundEnabled) {
+        initAudio();
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+    });
+  }
 }
 
-// Render Products Catalog based on active filters
-function renderProducts() {
-  productsGrid.innerHTML = '';
+// Navigation between Fullscreen Screens
+function navigateToScreen(screenId) {
+  // Cancel active Aviator loops if navigating away
+  if (activeScreen === 'aviator' && screenId !== 'aviator') {
+    cancelAnimationFrame(aviatorAnimId);
+    stopJetEngineSound();
+  }
   
-  const filteredProducts = PRODUCTS.filter(product => {
-    const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery) || 
-                          product.category.toLowerCase().includes(searchQuery);
-    return matchesCategory && matchesSearch;
-  });
+  activeScreen = screenId;
+  
+  // Toggle active CSS classes
+  screenLobby.classList.remove('active');
+  screenWingo.classList.remove('active');
+  screenAviator.classList.remove('active');
+  
+  // Remove active state on navbar buttons
+  document.querySelectorAll('.app-navigation-bar .nav-tab').forEach(tab => tab.classList.remove('active'));
+  
+  if (screenId === 'lobby') {
+    screenLobby.classList.add('active');
+    document.querySelectorAll('.app-navigation-bar .nav-tab')[0].classList.add('active');
+  } else if (screenId === 'wingo') {
+    screenWingo.classList.add('active');
+    document.querySelectorAll('.app-navigation-bar .nav-tab')[1].classList.add('active');
+  } else if (screenId === 'aviator') {
+    screenAviator.classList.add('active');
+    document.querySelectorAll('.app-navigation-bar .nav-tab')[2].classList.add('active');
+    initAviatorEngine(); // Start Aviator loop when entering screen
+  }
+}
 
-  if (filteredProducts.length === 0) {
-    productsGrid.innerHTML = `
-      <div class="no-products">
-        <svg viewBox="0 0 100 100" class="empty-search-svg">
-          <circle cx="50" cy="45" r="20" fill="none" stroke="#555" stroke-width="4"/>
-          <line x1="64" y1="59" x2="80" y2="75" stroke="#555" stroke-width="6" stroke-linecap="round"/>
-          <line x1="42" y1="37" x2="58" y2="53" stroke="#ff0055" stroke-width="4" stroke-linecap="round"/>
-        </svg>
-        <p>No gaming gear found for "${searchQuery}"</p>
-      </div>
+
+// --- WIN GO (COLOR PREDICTION) ENGINE ---
+
+function startWingoCountdownEngine() {
+  const periodValueEl = document.getElementById('wingo-period-id');
+  const tensEl = document.getElementById('wingo-seconds-tens');
+  const onesEl = document.getElementById('wingo-seconds-ones');
+  const lockBarrier = document.getElementById('bet-lock-barrier');
+  
+  if (periodValueEl) periodValueEl.textContent = wingoPeriodId;
+
+  // Clear existing loop if any
+  if (wingoTimerId) clearInterval(wingoTimerId);
+  
+  wingoTimerId = setInterval(() => {
+    wingoSecondsRemaining--;
+    
+    // Play tick sound on critical countdown
+    if (wingoSecondsRemaining <= 5 && wingoSecondsRemaining > 0) {
+      playTickSound();
+    }
+    
+    // Toggle Bet Locking status in the last 5 seconds of the round
+    if (wingoSecondsRemaining <= 5) {
+      if (lockBarrier && lockBarrier.style.display === 'none') {
+        lockBarrier.style.display = 'flex';
+        playLockSound();
+      }
+    } else {
+      if (lockBarrier && lockBarrier.style.display !== 'none') {
+        lockBarrier.style.display = 'none';
+      }
+    }
+
+    if (wingoSecondsRemaining < 0) {
+      // Draw Winning Outcome result
+      drawWingoOutcomeResult();
+      wingoSecondsRemaining = 60;
+    }
+    
+    // Format digits
+    const tensDigit = Math.floor(wingoSecondsRemaining / 10);
+    const onesDigit = wingoSecondsRemaining % 10;
+    
+    if (tensEl) tensEl.textContent = tensDigit;
+    if (onesEl) onesEl.textContent = onesDigit;
+  }, 1000);
+}
+
+// Generate pre-loaded log database if empty
+function generateMockWingoHistory() {
+  const basePeriod = wingoPeriodId - 20;
+  for (let i = 0; i < 15; i++) {
+    const pId = basePeriod + i;
+    const num = Math.floor(Math.random() * 10);
+    const size = num >= 5 ? 'Big' : 'Small';
+    let color = '';
+    
+    if (num === 0) color = 'violet-red';
+    else if (num === 5) color = 'violet-green';
+    else if (num % 2 === 0) color = 'red';
+    else color = 'green';
+    
+    wingoHistory.unshift({ period: pId, number: num, size: size, color: color });
+  }
+  localStorage.setItem('pandya_wingo_history', JSON.stringify(wingoHistory));
+  renderWingoHistoryList();
+}
+
+function renderWingoHistoryList() {
+  const container = document.getElementById('wingo-game-results-list');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  wingoHistory.slice(0, 30).forEach(row => {
+    const rowDiv = document.createElement('div');
+    rowDiv.className = 'record-row';
+    
+    // Determine color class
+    let colorBadgeHtml = '';
+    if (row.color === 'violet-red') {
+      colorBadgeHtml = '<span class="color-dot violet-red"></span>';
+    } else if (row.color === 'violet-green') {
+      colorBadgeHtml = '<span class="color-dot violet-green"></span>';
+    } else {
+      colorBadgeHtml = `<span class="color-dot ${row.color}"></span>`;
+    }
+    
+    rowDiv.innerHTML = `
+      <span class="period-cell">${row.period}</span>
+      <span class="num-cell color-${row.color}">${row.number}</span>
+      <span class="size-cell ${row.size === 'Big' ? 'big-label' : 'small-label'}">${row.size}</span>
+      <span>${colorBadgeHtml}</span>
     `;
+    container.appendChild(rowDiv);
+  });
+}
+
+function renderUserWingoBetsList() {
+  const container = document.getElementById('wingo-user-bets-list');
+  if (!container) return;
+  
+  if (userWingoBetsHistory.length === 0) {
+    container.innerHTML = '<div class="empty-record-placeholder">No bets placed in this session.</div>';
     return;
   }
-
-  filteredProducts.forEach(product => {
-    const inCartQty = cart[product.id] || 0;
-    const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+  
+  container.innerHTML = '';
+  userWingoBetsHistory.slice(0, 30).forEach(bet => {
+    const row = document.createElement('div');
+    row.className = 'user-bet-row';
     
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-      <div class="card-image-wrap">
-        <span class="delivery-badge">
-          <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 14h-2V8h2v8zm0-10h-2V4h2v2z"/></svg>
-          ${product.time}
-        </span>
-        ${product.svg}
-      </div>
-      <div class="card-details">
-        <div class="rating-badge">★ ${product.rating}</div>
-        <h3 class="product-title">${product.name}</h3>
-        <div class="price-action-row">
-          <div class="price-container">
-            <span class="price-current">₹${product.price}</span>
-            <span class="price-original">₹${product.originalPrice}</span>
-            <span class="price-discount">${discount}% OFF</span>
-          </div>
-          <div class="action-btn-container" id="action-${product.id}">
-            ${
-              inCartQty > 0 
-              ? `<div class="qty-counter">
-                  <button onclick="decrementItem('${product.id}')">−</button>
-                  <span>${inCartQty}</span>
-                  <button onclick="incrementItem('${product.id}')">+</button>
-                 </div>`
-              : `<button class="add-to-cart-btn" onclick="incrementItem('${product.id}')">ADD</button>`
-            }
-          </div>
-        </div>
-      </div>
+    let payoutHtml = '';
+    if (bet.status === 'Won') {
+      payoutHtml = `<span class="payout-cell won-color">+₹${bet.payout.toFixed(2)}</span>`;
+    } else if (bet.status === 'Lost') {
+      payoutHtml = `<span class="payout-cell lost-color">-₹${bet.amount.toFixed(2)}</span>`;
+    } else {
+      payoutHtml = `<span class="payout-cell">Pending...</span>`;
+    }
+    
+    row.innerHTML = `
+      <span class="period-cell">${bet.period}</span>
+      <span class="bet-cell">${bet.selection}</span>
+      <span>₹${bet.amount.toFixed(0)}</span>
+      <span>${payoutHtml}</span>
     `;
-    productsGrid.appendChild(card);
+    container.appendChild(row);
   });
 }
 
-// Increment Item Quantity
-window.incrementItem = function(productId) {
-  if (cart[productId]) {
-    cart[productId] += 1;
-  } else {
-    cart[productId] = 1;
-  }
-  updateCartUI();
-  renderProducts(); // Refresh buttons state in grid
-};
-
-// Decrement Item Quantity
-window.decrementItem = function(productId) {
-  if (cart[productId] > 1) {
-    cart[productId] -= 1;
-  } else {
-    delete cart[productId];
-  }
-  updateCartUI();
-  renderProducts(); // Refresh buttons state in grid
-};
-
-// Update Cart State & Elements
-function updateCartUI() {
-  const itemIds = Object.keys(cart);
-  const totalItems = itemIds.reduce((sum, id) => sum + cart[id], 0);
+// Confirm bet selections and draw outcomes
+function drawWingoOutcomeResult() {
+  const num = Math.floor(Math.random() * 10);
+  const size = num >= 5 ? 'Big' : 'Small';
+  let color = '';
   
-  // Calculate Totals
-  let itemsSubtotal = 0;
-  itemIds.forEach(id => {
-    const prod = PRODUCTS.find(p => p.id === id);
-    if (prod) {
-      itemsSubtotal += prod.price * cart[id];
-    }
-  });
-
-  // Blinkit logic: Free delivery over ₹499
-  const freeDeliveryThreshold = 499;
-  const deliveryFee = itemsSubtotal > freeDeliveryThreshold || itemsSubtotal === 0 ? 0 : 25;
-  const handlingFee = itemsSubtotal > 0 ? 4 : 0;
-  const grandTotal = itemsSubtotal + deliveryFee + handlingFee;
-
-  // Header & Mobile Cart Bars
-  cartCount.textContent = totalItems;
-  if (cartCountMobile) cartCountMobile.textContent = totalItems;
+  if (num === 0) color = 'violet-red';
+  else if (num === 5) color = 'violet-green';
+  else if (num % 2 === 0) color = 'red';
+  else color = 'green';
   
-  cartAmount.textContent = `₹${grandTotal}`;
-  if (cartAmountMobile) cartAmountMobile.textContent = `₹${grandTotal}`;
-
-  const headerCart = document.querySelector('.header-cart-btn');
-  const stickyCartMobile = document.getElementById('sticky-cart-bar-mobile');
+  const currentResult = {
+    period: wingoPeriodId,
+    number: num,
+    size: size,
+    color: color
+  };
   
-  if (totalItems > 0) {
-    headerCart.classList.add('has-items');
-    if (stickyCartMobile) stickyCartMobile.classList.add('visible');
-  } else {
-    headerCart.classList.remove('has-items');
-    if (stickyCartMobile) stickyCartMobile.classList.remove('visible');
-  }
+  // Prepend result
+  wingoHistory.unshift(currentResult);
+  localStorage.setItem('pandya_wingo_history', JSON.stringify(wingoHistory));
+  renderWingoHistoryList();
+  
+  // Evaluate user bets for current period
+  evaluateUserWingoBets(currentResult);
+  
+  // Advance period ID
+  wingoPeriodId++;
+  localStorage.setItem('pandya_wingo_period', wingoPeriodId.toString());
+  
+  // Update Period ID element
+  const periodValueEl = document.getElementById('wingo-period-id');
+  if (periodValueEl) periodValueEl.textContent = wingoPeriodId;
+}
 
-  // Draw Cart Drawer Content
-  if (totalItems === 0) {
-    emptyCartView.style.display = 'flex';
-    filledCartView.style.display = 'none';
-  } else {
-    emptyCartView.style.display = 'none';
-    filledCartView.style.display = 'flex';
-
-    // Populate List
-    cartItemsContainer.innerHTML = '';
-    itemIds.forEach(id => {
-      const prod = PRODUCTS.find(p => p.id === id);
-      if (prod) {
-        const itemRow = document.createElement('div');
-        itemRow.className = 'cart-item-row';
-        itemRow.innerHTML = `
-          <div class="cart-item-svg">${prod.svg}</div>
-          <div class="cart-item-info">
-            <h4 class="cart-item-name">${prod.name}</h4>
-            <span class="cart-item-price">₹${prod.price}</span>
-          </div>
-          <div class="qty-counter small">
-            <button onclick="decrementItem('${id}')">−</button>
-            <span>${cart[id]}</span>
-            <button onclick="incrementItem('${id}')">+</button>
-          </div>
-        `;
-        cartItemsContainer.appendChild(itemRow);
+function evaluateUserWingoBets(result) {
+  let roundWinnings = 0;
+  let hasWon = false;
+  let hasActiveBets = false;
+  
+  userWingoBetsHistory.forEach(bet => {
+    if (bet.period === result.period && bet.status === 'Pending') {
+      hasActiveBets = true;
+      let wins = false;
+      let payoutRate = 0;
+      
+      // Match condition check
+      if (bet.type === 'color') {
+        if (bet.selection === 'Green') {
+          if (result.color === 'green') { wins = true; payoutRate = 2.0; }
+          else if (result.color === 'violet-green') { wins = true; payoutRate = 1.5; }
+        } else if (bet.selection === 'Red') {
+          if (result.color === 'red') { wins = true; payoutRate = 2.0; }
+          else if (result.color === 'violet-red') { wins = true; payoutRate = 1.5; }
+        } else if (bet.selection === 'Violet') {
+          if (result.color === 'violet-red' || result.color === 'violet-green') { wins = true; payoutRate = 4.5; }
+        }
+      } else if (bet.type === 'size') {
+        if (bet.selection === 'Big' && result.size === 'Big') { wins = true; payoutRate = 2.0; }
+        else if (bet.selection === 'Small' && result.size === 'Small') { wins = true; payoutRate = 2.0; }
+      } else if (bet.type === 'number') {
+        if (parseInt(bet.selection) === result.number) { wins = true; payoutRate = 9.0; }
       }
-    });
-
-    // Subtotal & Bill breakdown
-    subtotalEl.textContent = `₹${itemsSubtotal}`;
-    deliveryFeeEl.textContent = deliveryFee === 0 ? 'FREE' : `₹${deliveryFee}`;
-    if (deliveryFee === 0 && itemsSubtotal > 0) {
-      deliveryFeeEl.classList.add('free-text');
-    } else {
-      deliveryFeeEl.classList.remove('free-text');
+      
+      if (wins) {
+        hasWon = true;
+        bet.status = 'Won';
+        bet.payout = bet.amount * payoutRate;
+        roundWinnings += bet.payout;
+      } else {
+        bet.status = 'Lost';
+        bet.payout = 0;
+      }
     }
-    handlingFeeEl.textContent = `₹${handlingFee}`;
-    grandTotalEl.textContent = `₹${grandTotal}`;
-    checkoutTotal.textContent = `₹${grandTotal}`;
-
-    // Delivery progress meter
-    if (itemsSubtotal >= freeDeliveryThreshold) {
-      progressText.innerHTML = `🎉 You get <strong>FREE delivery</strong>!`;
-      progressBar.style.width = '100%';
-      progressBar.style.background = '#00E676';
-    } else {
-      const remaining = freeDeliveryThreshold - itemsSubtotal;
-      const percent = (itemsSubtotal / freeDeliveryThreshold) * 100;
-      progressText.innerHTML = `Add items worth <strong>₹${remaining}</strong> more for <strong>FREE Delivery</strong>`;
-      progressBar.style.width = `${percent}%`;
-      progressBar.style.background = '#F9E300';
-    }
-  }
-}
-
-// Order Checkout - Simulated Drone Delivery Screen
-function startOrderCheckout() {
-  // Close cart drawer
-  toggleCart();
-  
-  // Show tracking overlay
-  trackerPortal.classList.add('open');
-  
-  // Reset tracking components
-  trackerTimer.textContent = '10:00';
-  closeTrackerBtn.disabled = true;
-  closeTrackerBtn.textContent = 'Drone En-Route...';
-  
-  // Update Rider Google Maps URL with current location coordinates
-  if (deliveryGoogleMapsLink) {
-    deliveryGoogleMapsLink.href = `https://www.google.com/maps/search/?api=1&query=${currentCoordinates.lat},${currentCoordinates.lon}`;
-  }
-  
-  // Render clean status timeline
-  const statuses = [
-    { label: 'Order Confirmed', time: 'Just now', icon: '📝', done: true },
-    { label: 'Packing Gamer Gear', time: 'In progress', icon: '📦', current: true },
-    { label: 'Drone Dispatched', time: 'Waiting...', icon: '🛸' },
-    { label: 'Out for Delivery', time: 'Waiting...', icon: '⚡' },
-    { label: 'Arrived at Gaming Den', time: 'Waiting...', icon: '🎮' }
-  ];
-  
-  renderTimeline(statuses);
-  
-  // Reset drone animation position
-  droneIcon.style.left = '10%';
-  droneIcon.style.top = '70%';
-  
-  // Launch Delivery Progress Simulator
-  runDeliverySimulation();
-}
-
-// Render Status Checkpoints
-function renderTimeline(stages) {
-  trackerStatusList.innerHTML = '';
-  stages.forEach(stage => {
-    const item = document.createElement('div');
-    item.className = `status-item ${stage.done ? 'completed' : ''} ${stage.current ? 'current' : ''}`;
-    item.innerHTML = `
-      <div class="status-icon-wrap">${stage.icon}</div>
-      <div class="status-details">
-        <h4 class="status-label">${stage.label}</h4>
-        <span class="status-time">${stage.time}</span>
-      </div>
-    `;
-    trackerStatusList.appendChild(item);
   });
-}
-
-// Run simulated timeline, time tick down, and move drone
-function runDeliverySimulation() {
-  let elapsedSec = 0;
-  let remainingMinutes = 10;
-  let remainingSeconds = 0;
   
-  // Fast forwarding timers: 10 mins down to 0 in 15 seconds
-  const timerInterval = setInterval(() => {
-    // Calculate simulated remaining time
-    let totalSimulatedSec = 600 - (elapsedSec * (600 / 15));
-    if (totalSimulatedSec < 0) totalSimulatedSec = 0;
-    
-    const displayMin = Math.floor(totalSimulatedSec / 60);
-    const displaySec = Math.floor(totalSimulatedSec % 60);
-    
-    trackerTimer.textContent = `${displayMin.toString().padStart(2, '0')}:${displaySec.toString().padStart(2, '0')}`;
-    
-    // Update drone flight coordinates
-    const progressPercent = elapsedSec / 15;
-    // Simple path: fly from lower-left (Hub) to upper-right (Den)
-    const startX = 15; // %
-    const startY = 70; // %
-    const endX = 80;   // %
-    const endY = 20;   // %
-    
-    const currX = startX + (endX - startX) * progressPercent;
-    const currY = startY + (endY - startY) * progressPercent;
-    
-    droneIcon.style.left = `${currX}%`;
-    droneIcon.style.top = `${currY}%`;
-    
-    elapsedSec += 0.1;
-    if (elapsedSec >= 15) {
-      clearInterval(timerInterval);
+  if (hasActiveBets) {
+    if (hasWon) {
+      walletBalance += roundWinnings;
+      updateBalanceUI();
+      playWinSound();
+      
+      // Display Rewards toast notify
+      showRewardAlertPopup(`Winner! +₹${roundWinnings.toFixed(2)}`, `Outcome was Number ${result.number} (${result.size})`);
+    } else {
+      playLoseSound();
     }
-  }, 100);
-
-  // Status updates timeline sequence
-  // Total duration: 15 seconds
-  setTimeout(() => {
-    // Packing Complete -> Dispatching
-    renderTimeline([
-      { label: 'Order Confirmed', time: '0 sec ago', icon: '📝', done: true },
-      { label: 'Gamer Gear Packed', time: 'Just now', icon: '📦', done: true },
-      { label: 'Drone Dispatched', time: 'In progress', icon: '🛸', current: true },
-      { label: 'Out for Delivery', time: 'Waiting...', icon: '⚡' },
-      { label: 'Arrived at Gaming Den', time: 'Waiting...', icon: '🎮' }
-    ]);
-  }, 3000);
-
-  setTimeout(() => {
-    // Dispatched -> Out for delivery
-    renderTimeline([
-      { label: 'Order Confirmed', time: '6 sec ago', icon: '📝', done: true },
-      { label: 'Gamer Gear Packed', time: '3 sec ago', icon: '📦', done: true },
-      { label: 'Drone Dispatched', time: 'Just now', icon: '🛸', done: true },
-      { label: 'Out for Delivery (Ranjan Drone-X1)', time: 'In progress', icon: '⚡', current: true },
-      { label: 'Arrived at Gaming Den', time: 'Waiting...', icon: '🎮' }
-    ]);
-  }, 6000);
-
-  setTimeout(() => {
-    // Almost there
-    renderTimeline([
-      { label: 'Order Confirmed', time: '10 sec ago', icon: '📝', done: true },
-      { label: 'Gamer Gear Packed', time: '7 sec ago', icon: '📦', done: true },
-      { label: 'Drone Dispatched', time: '4 sec ago', icon: '🛸', done: true },
-      { label: 'Out for Delivery (Ranjan Drone-X1)', time: 'Descending...', icon: '⚡', current: true },
-      { label: 'Arrived at Gaming Den', time: 'Almost there', icon: '🎮' }
-    ]);
-  }, 11000);
-
-  setTimeout(() => {
-    // Delivered!
-    renderTimeline([
-      { label: 'Order Confirmed', time: '15 sec ago', icon: '📝', done: true },
-      { label: 'Gamer Gear Packed', time: '12 sec ago', icon: '📦', done: true },
-      { label: 'Drone Dispatched', time: '9 sec ago', icon: '🛸', done: true },
-      { label: 'Out for Delivery', time: '5 sec ago', icon: '⚡', done: true },
-      { label: 'Arrived at Gaming Den 🎉', time: 'Delivered', icon: '🎮', done: true }
-    ]);
     
-    // Clear local cart
-    cart = {};
-    updateCartUI();
-    renderProducts();
-    
-    // Enable completion button
-    closeTrackerBtn.disabled = false;
-    closeTrackerBtn.textContent = 'Received! Back to Shop';
-    closeTrackerBtn.classList.add('ready');
-  }, 15000);
-}
-
-// Close Tracker
-function closeTracker() {
-  trackerPortal.classList.remove('open');
-}
-
-// Toggle Location Selector Modal
-function toggleLocationModal() {
-  locationModal.classList.toggle('open');
-  locationModalOverlay.classList.toggle('open');
-  
-  if (locationModal.classList.contains('open')) {
-    initLeafletMap();
+    localStorage.setItem('pandya_user_wingo_history', JSON.stringify(userWingoBetsHistory));
+    renderUserWingoBetsList();
   }
 }
 
-// Initialize Leaflet Map inside location modal
-function initLeafletMap() {
-  // If map is already initialized, just update view and invalidate size
-  if (leafletMap) {
-    leafletMap.setView([currentCoordinates.lat, currentCoordinates.lon], 15);
+// Display float alert success chip
+function showRewardAlertPopup(title, desc) {
+  const alertEl = document.getElementById('rewards-success-alert');
+  const titleEl = document.getElementById('reward-alert-title');
+  const descEl = document.getElementById('reward-alert-desc');
+  
+  if (alertEl && titleEl && descEl) {
+    titleEl.textContent = title;
+    descEl.textContent = desc;
+    alertEl.style.display = 'flex';
+    
     setTimeout(() => {
-      leafletMap.invalidateSize();
-    }, 100);
+      alertEl.style.display = 'none';
+    }, 4500);
+  }
+}
+
+// Drawer sheets bindings
+function openBetDrawer(type, selection, themeClass) {
+  // Check if round is locked
+  if (wingoSecondsRemaining <= 5) {
+    playLockSound();
     return;
   }
   
-  // Create map instance
-  leafletMap = L.map('location-map', {
-    zoomControl: false // Keep interface clean, user can pinch/scroll to zoom
-  }).setView([currentCoordinates.lat, currentCoordinates.lon], 15);
+  currentBetDrawerType = type;
+  currentBetDrawerSelection = selection;
+  currentBetBaseAmount = 1;
+  currentBetMultiplier = 1;
   
-  // Add dark themed CartoDB tiles for premium gaming theme matching
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; CartoDB'
-  }).addTo(leafletMap);
+  const drawer = document.getElementById('wingo-bet-drawer');
+  const overlay = document.getElementById('wingo-bet-drawer-overlay');
+  const titleBadge = document.getElementById('bet-drawer-badge');
+  const selectionText = document.getElementById('bet-drawer-selection-text');
+  const multInput = document.getElementById('bet-drawer-multiplier');
   
-  // Perform initial geocoding
-  reverseGeocodeCoords(currentCoordinates.lat, currentCoordinates.lon);
+  // Set theme classes on badge
+  if (titleBadge) {
+    titleBadge.className = `selected-bet-badge ${themeClass}`;
+  }
+  if (selectionText) {
+    selectionText.textContent = `${type.toUpperCase()}: ${selection}`;
+  }
+  if (multInput) {
+    multInput.value = 1;
+  }
   
-  // Update address and coordinates whenever user pans the map
-  leafletMap.on('moveend', () => {
-    const center = leafletMap.getCenter();
-    reverseGeocodeCoords(center.lat, center.lng);
+  // Set default active base amount
+  document.querySelectorAll('.base-amount-row .base-amt-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.base-amount-row .base-amt-chip')[0].classList.add('active');
+  
+  updateDrawerConfirmBtnText();
+  
+  if (drawer && overlay) {
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+  }
+  
+  // Request user sound enablement
+  initAudio();
+}
+
+function closeBetDrawer() {
+  const drawer = document.getElementById('wingo-bet-drawer');
+  const overlay = document.getElementById('wingo-bet-drawer-overlay');
+  if (drawer && overlay) {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+}
+
+function setBetBaseAmount(amount) {
+  currentBetBaseAmount = amount;
+  
+  // Toggle active UI chips
+  document.querySelectorAll('.base-amount-row .base-amt-chip').forEach(c => {
+    c.classList.remove('active');
+    if (parseInt(c.textContent.replace('₹', '')) === amount) {
+      c.classList.add('active');
+    }
+  });
+  
+  updateDrawerConfirmBtnText();
+  playTickSound();
+}
+
+function setBetMultiplier(mult) {
+  currentBetMultiplier = mult;
+  const input = document.getElementById('bet-drawer-multiplier');
+  if (input) input.value = mult;
+  updateDrawerConfirmBtnText();
+  playTickSound();
+}
+
+function adjustBetMultiplier(diff) {
+  currentBetMultiplier = Math.max(1, currentBetMultiplier + diff);
+  const input = document.getElementById('bet-drawer-multiplier');
+  if (input) input.value = currentBetMultiplier;
+  updateDrawerConfirmBtnText();
+  playTickSound();
+}
+
+function updateDrawerConfirmBtnText() {
+  const btn = document.getElementById('bet-drawer-confirm-btn');
+  if (btn) {
+    const total = currentBetBaseAmount * currentBetMultiplier;
+    btn.textContent = `Confirm Bet (₹${total.toFixed(2)})`;
+  }
+}
+
+function submitWingoBet() {
+  const agreement = document.getElementById('bet-agreement-check').checked;
+  if (!agreement) {
+    alert("Please check and agree to the Pandya Bet User Agreement Terms.");
+    return;
+  }
+  
+  const multiplierInput = document.getElementById('bet-drawer-multiplier');
+  if (multiplierInput) {
+    currentBetMultiplier = Math.max(1, parseInt(multiplierInput.value) || 1);
+  }
+  
+  const totalBetAmount = currentBetBaseAmount * currentBetMultiplier;
+  
+  // Check sufficient funds
+  if (walletBalance < totalBetAmount) {
+    alert("Insufficient Wallet Balance! Please add cash to place this bet.");
+    playLockSound();
+    return;
+  }
+  
+  // Deduct balance
+  walletBalance -= totalBetAmount;
+  updateBalanceUI();
+  
+  // Log bet object
+  const newBet = {
+    period: wingoPeriodId,
+    type: currentBetDrawerType,
+    selection: currentBetDrawerSelection,
+    amount: totalBetAmount,
+    status: 'Pending',
+    payout: 0
+  };
+  
+  userWingoBetsHistory.unshift(newBet);
+  localStorage.setItem('pandya_user_wingo_history', JSON.stringify(userWingoBetsHistory));
+  
+  renderUserWingoBetsList();
+  closeBetDrawer();
+  
+  // Highlight tab to show My Bets
+  switchRecordTab('user');
+  
+  playSynthSound(440, 'triangle', 0.15, 0.1); // Bet success sound
+}
+
+function switchRecordTab(tabName) {
+  const btnHistory = document.getElementById('tab-game-history');
+  const btnUser = document.getElementById('tab-user-bets');
+  const bodyHistory = document.getElementById('records-game-history');
+  const bodyUser = document.getElementById('records-user-bets');
+  
+  if (tabName === 'game') {
+    btnHistory.classList.add('active');
+    btnUser.classList.remove('active');
+    bodyHistory.style.display = 'block';
+    bodyUser.style.display = 'none';
+  } else {
+    btnHistory.classList.remove('active');
+    btnUser.classList.add('active');
+    bodyHistory.style.display = 'none';
+    bodyUser.style.display = 'block';
+  }
+}
+
+
+// --- AVIATOR GAME ENGINE (CRASH ENGINE ON HTML5 CANVAS) ---
+
+function initAviatorEngine() {
+  aviatorCanvas = document.getElementById('aviator-canvas');
+  if (!aviatorCanvas) return;
+  
+  aviatorCtx = aviatorCanvas.getContext('2d');
+  
+  // Set dimensions correctly (accounting for high density screens)
+  const rect = aviatorCanvas.getBoundingClientRect();
+  aviatorCanvas.width = rect.width;
+  aviatorCanvas.height = rect.height;
+  
+  // Initialize state
+  aviatorState = 'waiting';
+  aviatorWaitTimer = 5;
+  
+  // Cancel previous loops if active
+  if (aviatorAnimId) cancelAnimationFrame(aviatorAnimId);
+  
+  startAviatorRoundWaiting();
+}
+
+function renderAviatorHistoryBadges() {
+  const container = document.getElementById('aviator-history-list');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  aviatorHistory.slice(0, 15).forEach(val => {
+    const badge = document.createElement('span');
+    badge.className = 'aviator-mult-badge';
+    if (val >= 2.0) badge.classList.add('high-value');
+    if (val >= 10.0) badge.classList.add('huge-value');
+    badge.textContent = `${val.toFixed(2)}x`;
+    container.appendChild(badge);
   });
 }
 
-// Reverse Geocode Map Center Coordinates using OpenStreetMap Nominatim API
-let reverseGeocodeTimeout = null;
-function reverseGeocodeCoords(lat, lon) {
-  if (liveMapAddress) liveMapAddress.textContent = 'Scanning location coordinates...';
+function startAviatorRoundWaiting() {
+  aviatorState = 'waiting';
+  aviatorWaitTimer = 5;
   
-  // Update current coordinates state immediately
-  currentCoordinates = { lat: lat, lon: lon };
+  const displayWait = document.getElementById('aviator-waiting-display');
+  const displayFlew = document.getElementById('aviator-flew-away-alert');
+  const takeoffTimer = document.getElementById('aviator-takeoff-timer');
+  const multDisplay = document.getElementById('aviator-multiplier-display');
   
-  // Throttle API calls to stay within OpenStreetMap's usage policy (400ms throttle)
-  clearTimeout(reverseGeocodeTimeout);
-  reverseGeocodeTimeout = setTimeout(() => {
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`)
-      .then(res => {
-        if (!res.ok) throw new Error('Geocoding query failed');
-        return res.json();
-      })
-      .then(data => {
-        if (data && data.display_name) {
-          const rawAddr = data.display_name;
-          const addr = data.address;
-          const street = addr.road || addr.suburb || addr.neighbourhood || '';
-          const city = addr.city || addr.town || addr.village || addr.county || '';
-          const state = addr.state || '';
-          
-          let parsedAddress = '';
-          if (street) parsedAddress += `${street}, `;
-          if (city) parsedAddress += `${city}, `;
-          if (state) parsedAddress += state;
-          if (!parsedAddress) parsedAddress = rawAddr;
-          
-          if (liveMapAddress) liveMapAddress.textContent = parsedAddress;
-          tempSelectedAddressText = parsedAddress;
-        } else {
-          throw new Error('Invalid format');
-        }
-      })
-      .catch(err => {
-        console.warn("Reverse geocode error:", err);
-        const fallbackText = `📍 Lat: ${lat.toFixed(4)}, Lng: ${lon.toFixed(4)}`;
-        if (liveMapAddress) liveMapAddress.textContent = fallbackText;
-        tempSelectedAddressText = fallbackText;
-      });
-  }, 400);
-}
-
-// Recenter Map to physical GPS coordinates (HTML5 Geolocation)
-function recenterMapToGPS() {
-  if (gpsRecenterBtn) {
-    gpsRecenterBtn.disabled = true;
-    gpsRecenterBtn.textContent = '🛰️ Tracking GPS coordinates...';
-  }
+  if (displayWait) displayWait.style.display = 'flex';
+  if (displayFlew) displayFlew.style.display = 'none';
+  if (multDisplay) multDisplay.style.display = 'none';
+  if (takeoffTimer) takeoffTimer.textContent = aviatorWaitTimer;
   
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        currentCoordinates = { lat: lat, lon: lon };
-        
-        if (leafletMap) {
-          leafletMap.setView([lat, lon], 16);
-        }
-        resetRecenterBtnText();
-      },
-      (error) => {
-        // Fallback to IP lookup coordinates
-        fetchIPLocationToRecenter();
-      },
-      { timeout: 5000 }
-    );
-  } else {
-    fetchIPLocationToRecenter();
-  }
-}
-
-// Fallback IP lookup when device GPS access is denied
-function fetchIPLocationToRecenter() {
-  fetch('https://ipapi.co/json/')
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.latitude && data.longitude) {
-        const lat = data.latitude;
-        const lon = data.longitude;
-        currentCoordinates = { lat: lat, lon: lon };
-        if (leafletMap) leafletMap.setView([lat, lon], 15);
-      }
-      resetRecenterBtnText();
-    })
-    .catch(() => {
-      fetch('https://freeipapi.com/api/json')
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.latitude && data.longitude) {
-            const lat = data.latitude;
-            const lon = data.longitude;
-            currentCoordinates = { lat: lat, lon: lon };
-            if (leafletMap) leafletMap.setView([lat, lon], 15);
-          }
-          resetRecenterBtnText();
-        })
-        .catch(() => {
-          resetRecenterBtnText();
-        });
-    });
-}
-
-function resetRecenterBtnText() {
-  if (gpsRecenterBtn) {
-    gpsRecenterBtn.disabled = false;
-    gpsRecenterBtn.textContent = '🎯 Recenter GPS Location';
-  }
-}
-
-// Confirm Pin Location selected on Map
-function confirmPinLocation() {
-  if (!tempSelectedAddressText) {
-    tempSelectedAddressText = `📍 Lat: ${currentCoordinates.lat.toFixed(4)}, Lng: ${currentCoordinates.lon.toFixed(4)}`;
-  }
+  // Reset Bet UI consoles buttons
+  resetAviatorConsoleButtons();
   
-  currentLocationText.textContent = tempSelectedAddressText;
-  
-  // Show Google Maps verification link
-  updateGoogleMapsVerifyLink(currentCoordinates.lat, currentCoordinates.lon);
-  
-  // Update tracking map destination point label
-  const denLabel = document.querySelector('.den-point .point-label');
-  if (denLabel) denLabel.textContent = 'Your Den';
-
-  gpsStatusText.textContent = 'Location Confirmed!';
-  setTimeout(() => {
-    toggleLocationModal();
-    gpsStatusText.textContent = 'Save this map position as your delivery den';
-  }, 800);
-}
-
-// Save manually entered address
-function saveManualAddress() {
-  const address = manualAddressInput.value.trim();
-  if (address) {
-    currentLocationText.textContent = address;
-    manualAddressInput.value = '';
+  const interval = setInterval(() => {
+    aviatorWaitTimer--;
+    if (takeoffTimer) takeoffTimer.textContent = aviatorWaitTimer;
     
-    // Hide maps verification on manual inputs since coordinates aren't mapped
-    if (googleMapsVerifyWrap) googleMapsVerifyWrap.style.display = 'none';
-    toggleLocationModal();
+    // Play tick tick
+    playTickSound();
+    
+    if (aviatorWaitTimer <= 0) {
+      clearInterval(interval);
+      startAviatorTakeoff();
+    }
+  }, 1000);
+}
+
+function resetAviatorConsoleButtons() {
+  // Left Console
+  const amtLeft = parseFloat(document.getElementById('aviator-bet-amt-left').value) || 100;
+  const btnLeft = document.getElementById('aviator-bet-btn-left');
+  if (btnLeft) {
+    btnLeft.className = 'aviator-bet-submit-btn';
+    btnLeft.innerHTML = `<span class="btn-main-lbl">BET</span><span class="btn-sub-lbl">₹${amtLeft.toFixed(2)}</span>`;
+  }
+  aviatorBets.left.placed = false;
+  aviatorBets.left.win = false;
+  
+  // Right Console
+  const amtRight = parseFloat(document.getElementById('aviator-bet-amt-right').value) || 200;
+  const btnRight = document.getElementById('aviator-bet-btn-right');
+  if (btnRight) {
+    btnRight.className = 'aviator-bet-submit-btn';
+    btnRight.innerHTML = `<span class="btn-main-lbl">BET</span><span class="btn-sub-lbl">₹${amtRight.toFixed(2)}</span>`;
+  }
+  aviatorBets.right.placed = false;
+  aviatorBets.right.win = false;
+}
+
+function startAviatorTakeoff() {
+  aviatorState = 'flying';
+  aviatorMultiplier = 1.00;
+  aviatorTimeElapsed = 0;
+  
+  // Determine crash limit limit
+  const roll = Math.random();
+  if (roll < 0.15) {
+    // Instant crash (House edge 1.00x - 1.05x)
+    aviatorCrashLimit = 1.00 + (Math.random() * 0.05);
+  } else if (roll < 0.85) {
+    // Normal crashes (1.06x - 3.50x)
+    aviatorCrashLimit = 1.06 + (Math.random() * 2.44);
   } else {
-    manualAddressInput.focus();
+    // High flyers (3.50x - 18.00x)
+    aviatorCrashLimit = 3.50 + (Math.random() * 14.50);
+  }
+  
+  const displayWait = document.getElementById('aviator-waiting-display');
+  const multDisplay = document.getElementById('aviator-multiplier-display');
+  
+  if (displayWait) displayWait.style.display = 'none';
+  if (multDisplay) multDisplay.style.display = 'block';
+  
+  // Start Jet Engine hum sound
+  startJetEngineSound();
+  
+  // Run animation frame loops
+  runAviatorAnimationFrame();
+}
+
+function runAviatorAnimationFrame() {
+  if (aviatorState !== 'flying') return;
+  
+  aviatorTimeElapsed += 0.016; // Approx 60fps frame delta
+  
+  // Exponential multiplier equation
+  aviatorMultiplier = Math.pow(1.08, aviatorTimeElapsed * 2);
+  
+  // Update UI values
+  const multValEl = document.getElementById('aviator-mult-num');
+  if (multValEl) multValEl.textContent = aviatorMultiplier.toFixed(2);
+  
+  // Update Jet audio sound pitch frequency
+  updateJetEnginePitch(aviatorMultiplier);
+  
+  // Update interactive cash-out buttons values in real-time
+  updateAviatorCashoutValues();
+  
+  // Draw Canvas components
+  drawAviatorCanvasFrame();
+  
+  // Check Crash limit conditions
+  if (aviatorMultiplier >= aviatorCrashLimit) {
+    triggerAviatorCrash();
+    return;
+  }
+  
+  aviatorAnimId = requestAnimationFrame(runAviatorAnimationFrame);
+}
+
+function updateAviatorCashoutValues() {
+  // Left Panel
+  if (aviatorBets.left.placed && !aviatorBets.left.win) {
+    const cashValue = aviatorBets.left.amount * aviatorMultiplier;
+    const btnLeft = document.getElementById('aviator-bet-btn-left');
+    if (btnLeft) {
+      btnLeft.className = 'aviator-bet-submit-btn btn-cashout';
+      btnLeft.innerHTML = `<span class="btn-main-lbl">CASH OUT</span><span class="btn-sub-lbl">₹${cashValue.toFixed(2)}</span>`;
+    }
+  }
+  
+  // Right Panel
+  if (aviatorBets.right.placed && !aviatorBets.right.win) {
+    const cashValue = aviatorBets.right.amount * aviatorMultiplier;
+    const btnRight = document.getElementById('aviator-bet-btn-right');
+    if (btnRight) {
+      btnRight.className = 'aviator-bet-submit-btn btn-cashout';
+      btnRight.innerHTML = `<span class="btn-main-lbl">CASH OUT</span><span class="btn-sub-lbl">₹${cashValue.toFixed(2)}</span>`;
+    }
   }
 }
 
-// Update Google Maps Verification URL
-function updateGoogleMapsVerifyLink(lat, lon) {
-  if (googleMapsVerifyWrap && verifyOnGoogleMaps) {
-    verifyOnGoogleMaps.href = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
-    googleMapsVerifyWrap.style.display = 'flex';
+function drawAviatorCanvasFrame() {
+  const w = aviatorCanvas.width;
+  const h = aviatorCanvas.height;
+  
+  aviatorCtx.clearRect(0, 0, w, h);
+  
+  // Draw grid helper lines
+  aviatorCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+  aviatorCtx.lineWidth = 1;
+  const gridSpacing = 30;
+  for (let x = 0; x < w; x += gridSpacing) {
+    aviatorCtx.beginPath();
+    aviatorCtx.moveTo(x, 0);
+    aviatorCtx.lineTo(x, h);
+    aviatorCtx.stroke();
+  }
+  for (let y = 0; y < h; y += gridSpacing) {
+    aviatorCtx.beginPath();
+    aviatorCtx.moveTo(0, y);
+    aviatorCtx.lineTo(w, y);
+    aviatorCtx.stroke();
+  }
+  
+  // Math coordinates calculation for Bezier curve takeoff (curves up to the right)
+  const startX = 40;
+  const startY = h - 40;
+  
+  // Curve moves proportionally to elapsed time, capping at 85% width/height
+  const progress = Math.min(aviatorTimeElapsed / 4, 1.0);
+  const endX = startX + (w - startX - 80) * progress;
+  const endY = startY - (startY - 60) * Math.pow(progress, 1.8);
+  
+  // Draw glowing red flight path line
+  aviatorCtx.strokeStyle = 'var(--color-red)';
+  aviatorCtx.lineWidth = 4;
+  aviatorCtx.shadowColor = 'var(--color-red)';
+  aviatorCtx.shadowBlur = 10;
+  
+  aviatorCtx.beginPath();
+  aviatorCtx.moveTo(startX, startY);
+  // Control point is low to create a sweep curve
+  const controlX = startX + (endX - startX) * 0.5;
+  const controlY = startY;
+  aviatorCtx.quadraticCurveTo(controlX, controlY, endX, endY);
+  aviatorCtx.stroke();
+  
+  // Draw area gradient fill under curve
+  aviatorCtx.shadowBlur = 0; // reset shadow
+  const grad = aviatorCtx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, 'rgba(255, 42, 95, 0.25)');
+  grad.addColorStop(1, 'rgba(255, 42, 95, 0.00)');
+  aviatorCtx.fillStyle = grad;
+  
+  aviatorCtx.beginPath();
+  aviatorCtx.moveTo(startX, startY);
+  aviatorCtx.quadraticCurveTo(controlX, controlY, endX, endY);
+  aviatorCtx.lineTo(endX, startY);
+  aviatorCtx.closePath();
+  aviatorCtx.fill();
+  
+  // Draw glowing UFO / Rocket icon at the end coordinates
+  aviatorCtx.fillStyle = '#fff';
+  aviatorCtx.font = '28px sans-serif';
+  // Bounces up and down slightly to represent flight turbulence
+  const turbulenceY = Math.sin(aviatorTimeElapsed * 30) * 3;
+  aviatorCtx.fillText('🛸', endX - 14, endY + 10 + turbulenceY);
+  
+  // Draw axis boundaries
+  aviatorCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  aviatorCtx.lineWidth = 2;
+  aviatorCtx.beginPath();
+  aviatorCtx.moveTo(startX, 0);
+  aviatorCtx.lineTo(startX, startY);
+  aviatorCtx.lineTo(w, startY);
+  aviatorCtx.stroke();
+}
+
+function triggerAviatorCrash() {
+  aviatorState = 'crashed';
+  
+  // Stop engine and trigger explosion boom sound
+  stopJetEngineSound(true);
+  
+  // Prepend multiplier to history
+  aviatorHistory.unshift(aviatorMultiplier);
+  renderAviatorHistoryBadges();
+  
+  const alertEl = document.getElementById('aviator-flew-away-alert');
+  const crashValEl = document.getElementById('aviator-crash-value');
+  
+  if (alertEl && crashValEl) {
+    crashValEl.textContent = `${aviatorMultiplier.toFixed(2)}x`;
+    alertEl.style.display = 'flex';
+  }
+  
+  // Reset Bet submit buttons status to neutral
+  resetAviatorConsoleButtons();
+  
+  // Start countdown to next round after 3.5 seconds
+  setTimeout(() => {
+    startAviatorRoundWaiting();
+  }, 3500);
+}
+
+function adjustAviatorBetAmount(side, delta) {
+  const input = document.getElementById(`aviator-bet-amt-${side}`);
+  if (input) {
+    let current = parseFloat(input.value) || 100;
+    current = Math.max(10, current + delta);
+    input.value = current;
+    
+    // Refresh button sublabel details
+    const btn = document.getElementById(`aviator-bet-btn-${side}`);
+    if (btn && !aviatorBets[side].placed) {
+      btn.querySelector('.btn-sub-lbl').textContent = `₹${current.toFixed(2)}`;
+    }
   }
 }
 
-// Expose functions globally for inline HTML click actions
-window.toggleLocationModal = toggleLocationModal;
-window.confirmPinLocation = confirmPinLocation;
-window.saveManualAddress = saveManualAddress;
-window.recenterMapToGPS = recenterMapToGPS;
+function setAviatorBetAmount(side, amt) {
+  const input = document.getElementById(`aviator-bet-amt-${side}`);
+  if (input) {
+    input.value = amt;
+    const btn = document.getElementById(`aviator-bet-btn-${side}`);
+    if (btn && !aviatorBets[side].placed) {
+      btn.querySelector('.btn-sub-lbl').textContent = `₹${amt.toFixed(2)}`;
+    }
+  }
+  playTickSound();
+}
 
+function handleAviatorBetClick(side) {
+  const state = aviatorBets[side];
+  const input = document.getElementById(`aviator-bet-amt-${side}`);
+  const btn = document.getElementById(`aviator-bet-btn-${side}`);
+  
+  if (!state.placed) {
+    // --- Place Bet Action ---
+    const betVal = parseFloat(input.value) || 100;
+    
+    if (walletBalance < betVal) {
+      alert("Insufficient balance to place this Aviator bet!");
+      playLockSound();
+      return;
+    }
+    
+    // Deduct
+    walletBalance -= betVal;
+    updateBalanceUI();
+    
+    state.amount = betVal;
+    state.placed = true;
+    state.win = false;
+    
+    if (btn) {
+      btn.className = 'aviator-bet-submit-btn btn-cancel';
+      btn.innerHTML = `<span class="btn-main-lbl">CANCEL</span><span class="btn-sub-lbl">Waiting...</span>`;
+    }
+    playSynthSound(587.33, 'triangle', 0.15, 0.08); // Place bet beep
+  } else {
+    // --- Cancel or Cash Out Action ---
+    if (aviatorState === 'waiting') {
+      // Cancel bet before takeoff (refund)
+      walletBalance += state.amount;
+      updateBalanceUI();
+      
+      state.placed = false;
+      if (btn) {
+        btn.className = 'aviator-bet-submit-btn';
+        btn.innerHTML = `<span class="btn-main-lbl">BET</span><span class="btn-sub-lbl">₹${state.amount.toFixed(2)}</span>`;
+      }
+      playLockSound();
+    } else if (aviatorState === 'flying' && !state.win) {
+      // Cash out success!
+      const winnings = state.amount * aviatorMultiplier;
+      walletBalance += winnings;
+      updateBalanceUI();
+      
+      state.win = true;
+      state.placed = false;
+      
+      if (btn) {
+        btn.className = 'aviator-bet-submit-btn';
+        btn.style.opacity = '0.5';
+        btn.disabled = true;
+        btn.innerHTML = `<span class="btn-main-lbl">CASHED OUT</span><span class="btn-sub-lbl">+₹${winnings.toFixed(2)}</span>`;
+      }
+      
+      playWinSound();
+      
+      // Floating victory alert popup
+      showRewardAlertPopup(`Aviator Win! +₹${winnings.toFixed(2)}`, `Cashed out successfully at ${aviatorMultiplier.toFixed(2)}x`);
+      
+      // Reset disabled buttons state after round resets
+      setTimeout(() => {
+        if (btn) {
+          btn.style.opacity = '1';
+          btn.disabled = false;
+        }
+      }, 3500);
+    }
+  }
+}
+
+
+// --- DEPOSIT AND WITHDRAWAL SIMULATION GATEWAYS ---
+
+function openDepositModal() {
+  const modal = document.getElementById('deposit-modal');
+  const overlay = document.getElementById('deposit-modal-overlay');
+  
+  // Set default state values
+  document.getElementById('deposit-step-1').style.display = 'block';
+  document.getElementById('deposit-step-2').style.display = 'none';
+  document.getElementById('user-utr-input').value = '';
+  
+  setDepositAmount(500);
+  
+  if (modal && overlay) {
+    overlay.classList.add('open');
+    modal.classList.add('open');
+  }
+  
+  initAudio();
+}
+
+function closeDepositModal() {
+  const modal = document.getElementById('deposit-modal');
+  const overlay = document.getElementById('deposit-modal-overlay');
+  if (modal && overlay) {
+    modal.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+}
+
+function setDepositAmount(amt) {
+  selectedDepositAmountPreset = amt;
+  const input = document.getElementById('custom-dep-amt');
+  if (input) input.value = amt;
+  
+  // Highlight selected amount preset item
+  document.querySelectorAll('.deposit-amounts-presets .amt-preset-item').forEach(btn => {
+    btn.classList.remove('active');
+    if (parseInt(btn.textContent.replace('₹', '').replace(',', '')) === amt) {
+      btn.classList.add('active');
+    }
+  });
+  playTickSound();
+}
+
+function selectPaymentMethod(method) {
+  selectedDepositMethod = method;
+  document.querySelectorAll('.payment-methods-grid .pay-method-item').forEach(item => {
+    item.classList.remove('active');
+    if (item.querySelector('span').textContent.includes(method.split(' ')[0])) {
+      item.classList.add('active');
+    }
+  });
+  playTickSound();
+}
+
+function proceedToPaymentDetails() {
+  const customInput = document.getElementById('custom-dep-amt');
+  if (customInput) {
+    selectedDepositAmountPreset = parseFloat(customInput.value) || 500;
+  }
+  
+  if (selectedDepositAmountPreset < 100) {
+    alert("Minimum deposit amount is ₹100.");
+    return;
+  }
+  
+  // Transition to QR Invoice Screen
+  document.getElementById('deposit-step-1').style.display = 'none';
+  document.getElementById('deposit-step-2').style.display = 'block';
+  
+  // Map values
+  document.getElementById('invoice-payment-amount').textContent = `₹${selectedDepositAmountPreset.toFixed(2)}`;
+  
+  // Generate random dummy UPI address
+  const upis = ['pandya.pay@ybl', 'pandyabet@upi', 'pandya.games@paytm'];
+  document.getElementById('target-upi-address').textContent = upis[Math.floor(Math.random() * upis.length)];
+  
+  playTickSound();
+}
+
+function copyTargetUpi() {
+  const upiIdText = document.getElementById('target-upi-address').textContent;
+  navigator.clipboard.writeText(upiIdText).then(() => {
+    alert("UPI address ID copied to clipboard! Paste it inside your UPI application.");
+  });
+}
+
+function verifyDepositUtr() {
+  const utrInput = document.getElementById('user-utr-input').value.trim();
+  const verifyBtn = document.getElementById('verify-payment-btn');
+  
+  // 12-digit digits validation
+  const isValid = /^\d{12}$/.test(utrInput);
+  if (!isValid) {
+    alert("Invalid UTR Code! Please enter exactly 12 numeric digits from your UPI payment success screen.");
+    playLockSound();
+    return;
+  }
+  
+  if (verifyBtn) {
+    verifyBtn.disabled = true;
+    verifyBtn.textContent = 'Processing Transaction Verification...';
+  }
+  
+  // Simulate network verify timeout
+  setTimeout(() => {
+    walletBalance += selectedDepositAmountPreset;
+    updateBalanceUI();
+    
+    if (verifyBtn) {
+      verifyBtn.disabled = false;
+      verifyBtn.textContent = 'Verify & Add Balance';
+    }
+    
+    closeDepositModal();
+    playWinSound();
+    
+    // Floating Success notifications
+    showRewardAlertPopup(`Deposit Success!`, `₹${selectedDepositAmountPreset.toFixed(2)} has been credited to your balance.`);
+  }, 2200);
+}
+
+// Withdrawal functions
+function openWithdrawModal() {
+  const modal = document.getElementById('withdraw-modal');
+  const overlay = document.getElementById('withdraw-modal-overlay');
+  
+  if (modal && overlay) {
+    overlay.classList.add('open');
+    modal.classList.add('open');
+  }
+  initAudio();
+}
+
+function closeWithdrawModal() {
+  const modal = document.getElementById('withdraw-modal');
+  const overlay = document.getElementById('withdraw-modal-overlay');
+  if (modal && overlay) {
+    modal.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+}
+
+function submitWithdrawRequest() {
+  const amtInput = document.getElementById('withdraw-amount-input');
+  const acNum = document.getElementById('bank-ac-num').value.trim();
+  const IFSC = document.getElementById('bank-ifsc').value.trim();
+  const holder = document.getElementById('bank-holder').value.trim();
+  
+  const amt = parseFloat(amtInput.value) || 0;
+  
+  if (amt < 200) {
+    alert("Minimum withdrawal limit is ₹200.");
+    return;
+  }
+  
+  if (walletBalance < amt) {
+    alert("Insufficient withdrawable balance in wallet!");
+    playLockSound();
+    return;
+  }
+  
+  if (!acNum || !IFSC || !holder) {
+    alert("Please fill in all bank details (Account Number, IFSC, and Name).");
+    return;
+  }
+  
+  // Deduct
+  walletBalance -= amt;
+  updateBalanceUI();
+  
+  closeWithdrawModal();
+  playWinSound();
+  
+  // Reset fields
+  document.getElementById('bank-ac-num').value = '';
+  document.getElementById('bank-ifsc').value = '';
+  document.getElementById('bank-holder').value = '';
+  
+  showRewardAlertPopup(`Withdrawal Pending`, `₹${amt.toFixed(2)} processed to bank. Credits within 2 hours.`);
+}
+
+
+// --- LIVE MARQUEE WINNERS FEED FEED ---
+
+function startWinnersTickerFeed() {
+  const container = document.getElementById('winners-ticker-list');
+  if (!container) return;
+  
+  // Populate first 10 items
+  for (let i = 0; i < 10; i++) {
+    container.appendChild(generateRandomMarqueeWinnerItem());
+  }
+  
+  // Prepend new winner item every 3 seconds to keep feed fresh
+  setInterval(() => {
+    container.insertBefore(generateRandomMarqueeWinnerItem(), container.firstChild);
+    // Keep list clean, slice excess items
+    if (container.children.length > 15) {
+      container.removeChild(container.lastChild);
+    }
+  }, 3200);
+}
+
+function generateRandomMarqueeWinnerItem() {
+  const prefixes = ['98***', '99***', '97***', '88***', '87***', '78***', '95***', '81***'];
+  const suffix = Math.floor(100 + Math.random() * 900);
+  const user = prefixes[Math.floor(Math.random() * prefixes.length)] + suffix;
+  
+  const games = ['Wingo 1 Min', 'Aviator', 'UFO Flight'];
+  const game = games[Math.floor(Math.random() * games.length)];
+  
+  let winAmt = 0;
+  if (game === 'Aviator') {
+    winAmt = Math.floor(200 + Math.random() * 8000);
+  } else {
+    winAmt = Math.floor(10 + Math.random() * 400) * 10;
+  }
+  
+  const item = document.createElement('div');
+  item.className = 'ticker-item';
+  item.innerHTML = `User <strong>${user}</strong> bet in <strong>${game}</strong> and won <span class="win-amt">₹${winAmt}</span>!`;
+  return item;
+}
+
+
+// --- LOBBY ADDITIONAL POPUP MODALS ---
+function showCustomerService() {
+  alert("Pandya Bet Live Chat Support: Welcome! How can we assist you with deposit, bets, or VIP rewards today?");
+}
+
+function showVipDetails() {
+  alert("🏆 VIP Level 1 Perks:\n- Daily Sign-in bonus: ₹10\n- Level Up reward: ₹100\n- Instant Withdrawal times: under 2 hours\n- 2.5% bet rebate commission!");
+}
+
+function shareReferLink() {
+  alert("Referral Link Copied! Send it to your group chats. You will earn a 2.5% lifetime wager commission on all friend betting turnovers!");
+}
+
+function showLockedGameAlert(gameName) {
+  alert(`🔒 ${gameName} Lobby is locked!\nKeep playing Win Go or Aviator to reach VIP Level 3 and unlock mega reels!`);
+  playLockSound();
+}
+
+function openWingoRules() {
+  alert("Win Go 1 Min Rules:\n- Place a bet on Green, Violet, Red, Big, Small, or Numbers 0-9.\n- Timer ticks from 60 to 0. Betting closes at 5s remaining.\n- Outcomes: Numbers (9x payout), Colors (Red/Green 2x payout, Violet 4.5x), Size (Big/Small 2x).");
+}
+
+function openAviatorRules() {
+  alert("Aviator Rules:\n- Place a bet before takeoff.\n- Watch the plane lift off and multiplier rise.\n- Cash out before the plane flies away to win your bet multiplied.\n- If the plane crashes before cash out, you lose.");
+}

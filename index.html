@@ -3,354 +3,617 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ranjan Gamer - Instant Gaming Delivery in 10 Mins</title>
-  <meta name="description" content="Get gaming consoles, keyboards, mice, energy drinks, and digital game codes delivered to your gaming den in 10 minutes from Ranjan Gamer.">
+  <title>Pandya Bet - Premium Gaming Betting & Color Prediction Lobbies</title>
   
   <!-- Google Fonts - Outfit and Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Leaflet Map CSS & JS CDN -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- App Header -->
-  <header class="app-header">
-    <div class="header-container">
-      <!-- Logo and Location -->
-      <div class="header-left">
-        <h1 class="app-logo" id="main-logo-heading">
-          <span class="logo-ranjan">RANJAN</span><span class="logo-gamer">GAMER</span>
-        </h1>
-        <button class="special-location-btn" id="location-selector" aria-label="Select Delivery Location">
-          <span class="loc-pin">📍</span>
-          <span class="loc-text" id="current-location-text">Room 404, Cyber St, Tech Zone</span>
-          <span class="loc-arrow">▼</span>
-        </button>
-      </div>
-
-      <!-- Quick Search Bar -->
-      <div class="header-search-wrap">
-        <div class="search-bar">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" placeholder="Search for 'Red Bull', 'Keyboard', 'Steam Key', 'Thermal Paste'..." aria-label="Search gaming gear">
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="header-right">
-        <button class="login-btn" id="login-button">Login</button>
-        <button class="header-cart-btn" id="cart-btn" aria-label="Open shopping cart">
-          <span class="cart-icon">🛒</span>
-          <span class="cart-details-wrap">
-            <span class="cart-btn-label">My Cart</span>
-            <span class="cart-summary"><span id="cart-count">0</span> items • <span id="cart-amount">₹0</span></span>
-          </span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content Layout -->
-  <main class="main-content">
+  <!-- App Wrapper -->
+  <div class="app-container">
     
-    <!-- Hero Banner Slider -->
-    <section class="promo-section" aria-label="Promotional banners">
-      <div class="promo-banner">
-        <div class="banner-content">
-          <span class="banner-tag">⚡ INSTANT STORE</span>
-          <h2>Gamer Fuel & Gear in 10 Minutes!</h2>
-          <p>Running out of energy during a match? Need fresh thermal paste? Ranjan Drone-X1 will deliver it to your desk instantly.</p>
-          <div class="banner-highlight">💥 Free Delivery on orders above ₹499</div>
-        </div>
-        <div class="banner-visual">
-          <!-- A sleek futuristic vector design using SVGs directly in styles -->
-          <div class="floating-drone-wrapper">
-            <svg viewBox="0 0 100 100" class="banner-drone-svg">
-              <path d="M 20 50 L 80 50 M 50 30 L 50 70" stroke="#00ffcc" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="50" cy="50" r="14" fill="#111" stroke="#ff00ff" stroke-width="3"/>
-              <circle cx="20" cy="50" r="8" fill="#111" stroke="#00ffcc" stroke-width="2"/>
-              <circle cx="80" cy="50" r="8" fill="#111" stroke="#00ffcc" stroke-width="2"/>
-              <circle cx="50" cy="30" r="6" fill="#111" stroke="#ffff00" stroke-width="2"/>
-              <circle cx="50" cy="70" r="6" fill="#111" stroke="#ffff00" stroke-width="2"/>
-              <path d="M 12 45 L 28 45 M 72 45 L 88 45" stroke="#fff" stroke-width="2"/>
-            </svg>
+    <!-- HEADER BAR -->
+    <header class="app-header">
+      <div class="header-vip-wrap">
+        <span class="vip-badge">VIP 1</span>
+      </div>
+      <div class="header-logo">
+        <span class="logo-p">PANDYA</span><span class="logo-b">BET</span>
+      </div>
+      <div class="header-actions">
+        <button class="header-action-btn" id="sound-toggle-btn" aria-label="Toggle Sound">
+          <span class="icon">🔊</span>
+        </button>
+        <button class="header-action-btn" onclick="showCustomerService()" aria-label="Customer Support">
+          <span class="icon">🎧</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN APP PAGES SCREEN CONTAINER -->
+    <main class="app-content">
+
+      <!-- ================= LOBBY SCREEN ================= -->
+      <section class="app-screen active" id="screen-lobby">
+        
+        <!-- Balance Dashboard -->
+        <div class="balance-card">
+          <div class="bal-label-wrap">
+            <span class="bal-lbl">Available Balance</span>
+            <button class="refresh-bal-btn" id="refresh-bal-btn" aria-label="Refresh Balance">🔄</button>
+          </div>
+          <div class="bal-value-wrap">
+            <span class="currency-symbol">₹</span>
+            <span class="balance-amount" id="user-balance">1000.00</span>
+          </div>
+          <div class="bal-buttons">
+            <button class="bal-btn deposit-btn" onclick="openDepositModal()">
+              <span class="btn-icon">💰</span> Deposit
+            </button>
+            <button class="bal-btn withdraw-btn" onclick="openWithdrawModal()">
+              <span class="btn-icon">🏦</span> Withdraw
+            </button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Categories Navigation Tab Bar -->
-    <section class="categories-section" aria-label="Product categories">
-      <h2 class="section-title">Shop by Category</h2>
-      <div class="categories-scroll" id="categories-tabs">
-        <button class="category-chip active" data-category="all" id="cat-all">All Gear</button>
-        <button class="category-chip" data-category="drinks" id="cat-drinks">🥤 Energy & Drinks</button>
-        <button class="category-chip" data-category="accessories" id="cat-accessories">⌨️ Keyboards & Mice</button>
-        <button class="category-chip" data-category="hardware" id="cat-hardware">🔧 Hardware & Paste</button>
-        <button class="category-chip" data-category="keys" id="cat-keys">🎟️ Digital Cards</button>
-        <button class="category-chip" data-category="snacks" id="cat-snacks">🍟 Gamer Snacks</button>
-        <button class="category-chip" data-category="console" id="cat-console">🎮 Console Upgrades</button>
-      </div>
-    </section>
+        <!-- Banner Promo Slider -->
+        <div class="banner-slider">
+          <div class="banner-track" id="banner-track">
+            <div class="banner-slide slide-1">
+              <div class="slide-content">
+                <h3>First Deposit Bonus</h3>
+                <p>Get 100% extra coins on your first deposit!</p>
+                <button class="banner-action-btn" onclick="openDepositModal()">Deposit Now</button>
+              </div>
+            </div>
+            <div class="banner-slide slide-2">
+              <div class="slide-content">
+                <h3>Pandya VIP Club</h3>
+                <p>Upgrade to VIP & get weekly rewards up to ₹50,000!</p>
+                <button class="banner-action-btn" onclick="showVipDetails()">View Perks</button>
+              </div>
+            </div>
+            <div class="banner-slide slide-3">
+              <div class="slide-content">
+                <h3>Refer & Earn program</h3>
+                <p>Earn 2.5% lifetime commissions on friend bets!</p>
+                <button class="banner-action-btn" onclick="shareReferLink()">Invite Friends</button>
+              </div>
+            </div>
+          </div>
+          <div class="banner-dots" id="banner-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
 
-    <!-- Product Grid Catalog -->
-    <section class="products-section" aria-label="Products list">
-      <h2 class="section-title">Fresh Stock Delivered Instantly</h2>
-      <div class="products-grid" id="products-grid">
-        <!-- Rendered dynamically by JavaScript -->
-      </div>
-    </section>
+        <!-- Live Winners Ticker Bar -->
+        <div class="winners-ticker">
+          <div class="ticker-badge">Live Win</div>
+          <div class="ticker-marquee-wrap">
+            <div class="ticker-list" id="winners-ticker-list">
+              <!-- Dynamically populated ticker statements -->
+            </div>
+          </div>
+        </div>
 
-  </main>
+        <!-- Game Categories tabs -->
+        <div class="category-tabs">
+          <button class="tab-chip active">All Games</button>
+          <button class="tab-chip">Win Go</button>
+          <button class="tab-chip">Aviator</button>
+          <button class="tab-chip">Slots</button>
+        </div>
 
-  <!-- Sticky Mobile Cart Bar -->
-  <div class="sticky-cart-bar" id="sticky-cart-bar-mobile">
-    <div class="sticky-cart-info">
-      <span class="sticky-cart-qty"><span id="cart-count-mobile">0</span> Item(s)</span>
-      <span class="sticky-cart-total"><span id="cart-amount-mobile">₹0</span></span>
-    </div>
-    <button class="sticky-view-cart-btn" id="cart-btn-mobile">
-      View Cart <span>🛒</span>
-    </button>
+        <!-- Games Grid -->
+        <div class="games-grid">
+          
+          <!-- Win Go 1 Min Card -->
+          <div class="game-card card-wingo" onclick="navigateToScreen('wingo')">
+            <div class="card-glow"></div>
+            <div class="game-badge">HOT</div>
+            <div class="game-card-content">
+              <span class="game-icon">🎨</span>
+              <div class="game-meta">
+                <h3>Win Go 1 Min</h3>
+                <p>Color Prediction Game</p>
+              </div>
+            </div>
+            <div class="game-card-footer">
+              <span class="play-label">Play Now</span>
+              <span class="play-arrow">➔</span>
+            </div>
+          </div>
+
+          <!-- Aviator Crash Card -->
+          <div class="game-card card-aviator" onclick="navigateToScreen('aviator')">
+            <div class="card-glow"></div>
+            <div class="game-badge green-badge">POPULAR</div>
+            <div class="game-card-content">
+              <span class="game-icon">🛸</span>
+              <div class="game-meta">
+                <h3>Aviator</h3>
+                <p>High-Multiplier Crash Game</p>
+              </div>
+            </div>
+            <div class="game-card-footer">
+              <span class="play-label">Take Off</span>
+              <span class="play-arrow">➔</span>
+            </div>
+          </div>
+
+          <!-- Jili Slots mock Card -->
+          <div class="game-card card-locked" onclick="showLockedGameAlert('Slots')">
+            <div class="game-card-content">
+              <span class="game-icon">🎰</span>
+              <div class="game-meta">
+                <h3>Super Slots</h3>
+                <p>Mega Jackpot Reels</p>
+              </div>
+            </div>
+            <div class="game-card-locked-footer">
+              <span>🔒 Locked (Lvl 3 VIP)</span>
+            </div>
+          </div>
+
+          <!-- Fishing Hunter mock Card -->
+          <div class="game-card card-locked" onclick="showLockedGameAlert('Fishing')">
+            <div class="game-card-content">
+              <span class="game-icon">🐠</span>
+              <div class="game-meta">
+                <h3>Fish Hunter</h3>
+                <p>Ocean Multipliers Arena</p>
+              </div>
+            </div>
+            <div class="game-card-locked-footer">
+              <span>🔒 Locked (Lvl 5 VIP)</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ================= WIN GO SCREEN ================= -->
+      <section class="app-screen" id="screen-wingo">
+        
+        <!-- Screen Navigation subhead -->
+        <div class="screen-navbar">
+          <button class="nav-back-btn" onclick="navigateToScreen('lobby')">↩ Lobby</button>
+          <h2>Win Go 1 Min</h2>
+          <button class="rule-btn" onclick="openWingoRules()">Rules</button>
+        </div>
+
+        <!-- Timer dashboard -->
+        <div class="wingo-dashboard">
+          <div class="wingo-period-info">
+            <span class="period-title font-heading">Period ID</span>
+            <span class="period-value" id="wingo-period-id">2026071010001</span>
+          </div>
+          
+          <div class="wingo-timer-info">
+            <span class="timer-title font-heading">Time Remaining</span>
+            <div class="timer-digits-wrap" id="wingo-countdown-digits">
+              <span class="digit">0</span>
+              <span class="digit">0</span>
+              <span class="colon">:</span>
+              <span class="digit" id="wingo-seconds-tens">6</span>
+              <span class="digit" id="wingo-seconds-ones">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bet Lock indicator overlay -->
+        <div class="bet-lock-barrier" id="bet-lock-barrier" style="display: none;">
+          <div class="lock-panel">
+            <span class="lock-icon">🔒</span>
+            <h3>Betting Locked for Next Round</h3>
+            <p>Wait for results to compile...</p>
+          </div>
+        </div>
+
+        <!-- BETTING ACTION SELECTORS BOARD -->
+        <div class="betting-board-section">
+          
+          <!-- Color Bet row -->
+          <div class="bet-color-row">
+            <button class="color-btn btn-green" onclick="openBetDrawer('color', 'Green', 'green')">
+              Green (2x)
+            </button>
+            <button class="color-btn btn-violet" onclick="openBetDrawer('color', 'Violet', 'violet')">
+              Violet (4.5x)
+            </button>
+            <button class="color-btn btn-red" onclick="openBetDrawer('color', 'Red', 'red')">
+              Red (2x)
+            </button>
+          </div>
+
+          <!-- Numbers Grid selectors -->
+          <div class="bet-numbers-grid">
+            <button class="num-btn num-0" onclick="openBetDrawer('number', 0, 'violet-red')">0</button>
+            <button class="num-btn num-1" onclick="openBetDrawer('number', 1, 'green')">1</button>
+            <button class="num-btn num-2" onclick="openBetDrawer('number', 2, 'red')">2</button>
+            <button class="num-btn num-3" onclick="openBetDrawer('number', 3, 'green')">3</button>
+            <button class="num-btn num-4" onclick="openBetDrawer('number', 4, 'red')">4</button>
+            <button class="num-btn num-5" onclick="openBetDrawer('number', 5, 'violet-green')">5</button>
+            <button class="num-btn num-6" onclick="openBetDrawer('number', 6, 'red')">6</button>
+            <button class="num-btn num-7" onclick="openBetDrawer('number', 7, 'green')">7</button>
+            <button class="num-btn num-8" onclick="openBetDrawer('number', 8, 'red')">8</button>
+            <button class="num-btn num-9" onclick="openBetDrawer('number', 9, 'green')">9</button>
+          </div>
+
+          <!-- Size Bet row -->
+          <div class="bet-size-row">
+            <button class="size-btn btn-big" onclick="openBetDrawer('size', 'Big', 'gold')">Big (2x)</button>
+            <button class="size-btn btn-small" onclick="openBetDrawer('size', 'Small', 'blue')">Small (2x)</button>
+          </div>
+
+        </div>
+
+        <!-- History and Records Tabs logs -->
+        <div class="records-tabs-container">
+          <div class="records-header-tabs">
+            <button class="records-tab-btn active" id="tab-game-history" onclick="switchRecordTab('game')">Game Records</button>
+            <button class="records-tab-btn" id="tab-user-bets" onclick="switchRecordTab('user')">My Bets</button>
+          </div>
+          
+          <!-- Game Records Content -->
+          <div class="records-body-section" id="records-game-history">
+            <div class="records-table-header">
+              <span>Period</span>
+              <span>Number</span>
+              <span>Size</span>
+              <span>Color</span>
+            </div>
+            <div class="records-rows-wrap" id="wingo-game-results-list">
+              <!-- Populated dynamically by timer triggers -->
+            </div>
+          </div>
+
+          <!-- User Bets Content -->
+          <div class="records-body-section" id="records-user-bets" style="display: none;">
+            <div class="records-table-header">
+              <span>Period</span>
+              <span>Selection</span>
+              <span>Bet</span>
+              <span>Payout</span>
+            </div>
+            <div class="records-rows-wrap" id="wingo-user-bets-list">
+              <div class="empty-record-placeholder">No bets placed in this session.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= AVIATOR SCREEN ================= -->
+      <section class="app-screen" id="screen-aviator">
+        
+        <!-- Screen Nav -->
+        <div class="screen-navbar">
+          <button class="nav-back-btn" onclick="navigateToScreen('lobby')">↩ Lobby</button>
+          <div class="aviator-navbar-title">
+            <span class="red-dot-blink"></span>
+            <h2>Aviator</h2>
+          </div>
+          <button class="rule-btn" onclick="openAviatorRules()">Rules</button>
+        </div>
+
+        <!-- Aviator Past Crash History Multipliers Row -->
+        <div class="aviator-history-row" id="aviator-history-list">
+          <!-- Populated dynamically by crash records -->
+        </div>
+
+        <!-- Flight Path Canvas Chart Window -->
+        <div class="aviator-chart-container">
+          <canvas id="aviator-canvas"></canvas>
+          
+          <!-- Live Multiplier numbers -->
+          <div class="aviator-multiplier-wrap" id="aviator-multiplier-display">
+            <span class="mult-val" id="aviator-mult-num">1.00</span><span class="mult-x">x</span>
+          </div>
+
+          <!-- Crash Alert message overlays -->
+          <div class="aviator-flew-away-alert" id="aviator-flew-away-alert" style="display: none;">
+            <h2>Flew Away!</h2>
+            <p>Plane crashed at <span id="aviator-crash-value">1.45x</span></p>
+          </div>
+
+          <!-- Waiting for next round overlay -->
+          <div class="aviator-waiting-alert" id="aviator-waiting-display">
+            <div class="waiting-spinner"></div>
+            <h2>Waiting for next round...</h2>
+            <p>Takeoff starting in <span id="aviator-takeoff-timer">5</span> seconds</p>
+          </div>
+        </div>
+
+        <!-- Dual Cockpit Consoles for Double Bets -->
+        <div class="aviator-consoles-wrap">
+          
+          <!-- Left Panel console -->
+          <div class="aviator-console-card" id="console-left">
+            <div class="console-tab-header">
+              <span class="active">Bet</span>
+            </div>
+            
+            <div class="console-body">
+              <div class="amount-tuner-wrap">
+                <button class="tune-btn" onclick="adjustAviatorBetAmount('left', -10)">-</button>
+                <input type="number" id="aviator-bet-amt-left" value="100">
+                <button class="tune-btn" onclick="adjustAviatorBetAmount('left', 10)">+</button>
+              </div>
+              <div class="preset-chips-row">
+                <button class="chip-item" onclick="setAviatorBetAmount('left', 50)">₹50</button>
+                <button class="chip-item" onclick="setAviatorBetAmount('left', 100)">₹100</button>
+                <button class="chip-item" onclick="setAviatorBetAmount('left', 500)">₹500</button>
+                <button class="chip-item" onclick="setAviatorBetAmount('left', 1000)">₹1k</button>
+              </div>
+              
+              <button class="aviator-bet-submit-btn" id="aviator-bet-btn-left" onclick="handleAviatorBetClick('left')">
+                <span class="btn-main-lbl">BET</span>
+                <span class="btn-sub-lbl">₹100.00</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Panel console -->
+          <div class="aviator-console-card" id="console-right">
+            <div class="console-tab-header">
+              <span class="active">Bet</span>
+            </div>
+            
+            <div class="console-body">
+              <div class="amount-tuner-wrap">
+                <button class="tune-btn" onclick="adjustAviatorBetAmount('right', -10)">-</button>
+                <input type="number" id="aviator-bet-amt-right" value="200">
+                <button class="tune-btn" onclick="adjustAviatorBetAmount('right', 10)">+</button>
+              </div>
+              <div class="preset-chips-row">
+                <button class="chip-item" onclick="setAviatorBetAmount('right', 50)">₹50</button>
+                <button class="chip-item" onclick="setAviatorBetAmount('right', 100)">₹100</button>
+                <button class="chip-item" onclick="setAviatorBetAmount('right', 500)">₹500</button>
+                <button class="chip-item" onclick="setAviatorBetAmount('right', 1000)">₹1k</button>
+              </div>
+              
+              <button class="aviator-bet-submit-btn" id="aviator-bet-btn-right" onclick="handleAviatorBetClick('right')">
+                <span class="btn-main-lbl">BET</span>
+                <span class="btn-sub-lbl">₹200.00</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom App Navigation tab bar -->
+    <nav class="app-navigation-bar">
+      <button class="nav-tab active" onclick="navigateToScreen('lobby')">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-tab" onclick="navigateToScreen('wingo')">
+        <span class="nav-icon">🎨</span>
+        <span class="nav-label">Win Go</span>
+      </button>
+      <button class="nav-tab" onclick="navigateToScreen('aviator')">
+        <span class="nav-icon">🛸</span>
+        <span class="nav-label">Aviator</span>
+      </button>
+      <button class="nav-tab" onclick="openDepositModal()">
+        <span class="nav-icon">💳</span>
+        <span class="nav-label">Deposit</span>
+      </button>
+    </nav>
+
   </div>
 
-  <!-- Footer -->
-  <footer class="app-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <h3>RANJAN GAMER</h3>
-        <p>Blinkit-style hyper-local instant delivery for PC and Console gamers. Built for maximum speed.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Popular Categories</h4>
-        <ul>
-          <li><a href="#cat-drinks">Energy Drinks</a></li>
-          <li><a href="#cat-accessories">Mechanical Keyboards</a></li>
-          <li><a href="#cat-keys">Steam Gift Cards</a></li>
-          <li><a href="#cat-hardware">PC Cooling Fans</a></li>
-        </ul>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Ranjan Gamer Delivery. Delivered in 10 minutes by high-speed delivery drones.</p>
-      </div>
+
+  <!-- ================= DIALOGS AND OVERLAY MODALS ================= -->
+
+  <!-- WINGO BET SELECTION BOTTOM DRAWER -->
+  <div class="modal-overlay" id="wingo-bet-drawer-overlay" onclick="closeBetDrawer()"></div>
+  <div class="bet-selection-drawer" id="wingo-bet-drawer">
+    <div class="drawer-header">
+      <h3 id="bet-drawer-title">Bet details</h3>
+      <button class="drawer-close" onclick="closeBetDrawer()">✕</button>
     </div>
-  </footer>
-
-  <!-- Shopping Cart Drawer Slider Overlay -->
-  <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
-  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-    <div class="cart-drawer-header">
-      <h2 id="cart-title">My Cart</h2>
-      <button class="close-cart-btn" id="close-cart" aria-label="Close cart">✕</button>
-    </div>
-
-    <!-- Empty Cart View -->
-    <div class="cart-empty-state" id="empty-cart-view">
-      <div class="empty-cart-icon">🛒</div>
-      <h3>Your cart is empty</h3>
-      <p>No gaming gear added yet. Fill your cart with energy drinks and accessories to start playing!</p>
-    </div>
-
-    <!-- Filled Cart View -->
-    <div class="cart-filled-state" id="filled-cart-view" style="display: none;">
-      <!-- Free Delivery Progress Meter -->
-      <div class="free-delivery-meter">
-        <p class="meter-text" id="progress-text">Add items worth ₹250 more to get FREE delivery</p>
-        <div class="meter-track">
-          <div class="meter-fill" id="progress-bar"></div>
-        </div>
-      </div>
-
-      <!-- Items List Container -->
-      <div class="cart-items-list" id="cart-items">
-        <!-- Rendered dynamically by JavaScript -->
-      </div>
-
-      <!-- Bill Details breakdown -->
-      <div class="bill-details-section">
-        <h3>Bill Details</h3>
-        <div class="bill-row">
-          <span>Items Total</span>
-          <span id="bill-subtotal">₹0</span>
-        </div>
-        <div class="bill-row">
-          <span>Delivery Partner Fee</span>
-          <span id="bill-delivery">₹25</span>
-        </div>
-        <div class="bill-row">
-          <span>Gamer Handling Charge</span>
-          <span id="bill-handling">₹4</span>
-        </div>
-        <hr class="bill-divider">
-        <div class="bill-row grand-total-row">
-          <span>Grand Total</span>
-          <span id="bill-grandtotal">₹0</span>
-        </div>
-      </div>
-
-      <!-- Checkout CTA Panel -->
-      <div class="cart-checkout-panel">
-        <button class="checkout-submit-btn" id="checkout-btn">
-          <span class="checkout-amount-side">
-            <span class="checkout-val" id="checkout-total">₹0</span>
-            <span class="checkout-lbl">GRAND TOTAL</span>
-          </span>
-          <span class="checkout-action-text">Place Order ➔</span>
-        </button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Live Drone Delivery Tracking Portal Overlay -->
-  <div class="tracker-portal" id="tracker-portal">
-    <div class="tracker-card">
-      <div class="tracker-header">
-        <div class="tracker-logo">🛸 RANJAN DRONE-X1</div>
-        <div class="tracker-eta">
-          <span class="eta-label">Arriving In</span>
-          <span class="eta-timer" id="tracker-timer">10:00</span>
-        </div>
+    
+    <div class="drawer-body">
+      <!-- Bet item info badge -->
+      <div class="selected-bet-badge" id="bet-drawer-badge">
+        Selection: <strong id="bet-drawer-selection-text">Red</strong>
       </div>
       
-      <!-- Simulated Interactive Map -->
-      <div class="map-container" id="drone-map">
-        <!-- Radial Scanning Grid Background -->
-        <div class="map-grid"></div>
+      <!-- Base Amount Selection Chips -->
+      <div class="drawer-selection-label">Select Base Amount</div>
+      <div class="base-amount-row">
+        <button class="base-amt-chip active" onclick="setBetBaseAmount(1)">₹1</button>
+        <button class="base-amt-chip" onclick="setBetBaseAmount(10)">₹10</button>
+        <button class="base-amt-chip" onclick="setBetBaseAmount(100)">₹100</button>
+        <button class="base-amt-chip" onclick="setBetBaseAmount(1000)">₹1000</button>
+      </div>
+
+      <!-- Multiplier Counter selection -->
+      <div class="drawer-selection-label">Select Bet Multiplier</div>
+      <div class="multiplier-row">
+        <button class="mult-tune-btn" onclick="adjustBetMultiplier(-1)">−</button>
+        <input type="number" class="mult-input-field" id="bet-drawer-multiplier" value="1" min="1">
+        <button class="mult-tune-btn" onclick="adjustBetMultiplier(1)">+</button>
+      </div>
+      
+      <!-- Preset Fast multiplier chips -->
+      <div class="fast-multipliers-row">
+        <button class="fast-mult-chip" onclick="setBetMultiplier(5)">5x</button>
+        <button class="fast-mult-chip" onclick="setBetMultiplier(10)">10x</button>
+        <button class="fast-mult-chip" onclick="setBetMultiplier(20)">20x</button>
+        <button class="fast-mult-chip" onclick="setBetMultiplier(50)">50x</button>
+      </div>
+
+      <!-- Agreement checkbox -->
+      <div class="agreement-row">
+        <input type="checkbox" id="bet-agreement-check" checked>
+        <label for="bet-agreement-check">I agree to the Pandya Bet User Agreement Terms</label>
+      </div>
+    </div>
+
+    <!-- Final Drawer CTA Footer -->
+    <div class="drawer-footer-actions">
+      <button class="drawer-action-btn cancel-btn" onclick="closeBetDrawer()">Cancel</button>
+      <button class="drawer-action-btn confirm-btn" id="bet-drawer-confirm-btn" onclick="submitWingoBet()">
+        Confirm Bet (₹1.00)
+      </button>
+    </div>
+  </div>
+
+
+  <!-- SIMULATED DEPOSIT GATEWAY MODAL -->
+  <div class="modal-overlay" id="deposit-modal-overlay" onclick="closeDepositModal()"></div>
+  <div class="fullscreen-modal-card" id="deposit-modal">
+    <div class="modal-header">
+      <h2>Add Cash Gateway</h2>
+      <button class="close-modal-btn" onclick="closeDepositModal()">✕ Close</button>
+    </div>
+    
+    <div class="deposit-body-tabs" id="deposit-step-1">
+      <div class="modal-subheading">Select Deposit Method</div>
+      <div class="payment-methods-grid">
+        <button class="pay-method-item active" onclick="selectPaymentMethod('UPI Fast')">
+          <span class="pay-icon">📱</span>
+          <span>UPI Instant Transfer</span>
+        </button>
+        <button class="pay-method-item" onclick="selectPaymentMethod('Paytm App')">
+          <span class="pay-icon">💳</span>
+          <span>Paytm Wallet Direct</span>
+        </button>
+      </div>
+
+      <div class="modal-subheading">Select Deposit Amount</div>
+      <div class="deposit-amounts-presets">
+        <button class="amt-preset-item" onclick="setDepositAmount(100)">₹100</button>
+        <button class="amt-preset-item active" onclick="setDepositAmount(500)">₹500</button>
+        <button class="amt-preset-item" onclick="setDepositAmount(1000)">₹1,000</button>
+        <button class="amt-preset-item" onclick="setDepositAmount(5000)">₹5,000</button>
+        <button class="amt-preset-item" onclick="setDepositAmount(10000)">₹10,000</button>
+        <button class="amt-preset-item" onclick="setDepositAmount(20000)">₹20,000</button>
+      </div>
+
+      <div class="custom-amount-input-wrap">
+        <label for="custom-dep-amt">Or Enter Custom Amount (₹)</label>
+        <input type="number" id="custom-dep-amt" value="500" min="100">
+      </div>
+
+      <button class="deposit-action-submit" onclick="proceedToPaymentDetails()">
+        Proceed to UPI QR Code ➔
+      </button>
+    </div>
+
+    <!-- Step 2: UPI details mapping page -->
+    <div class="deposit-body-tabs" id="deposit-step-2" style="display: none;">
+      <div class="payment-invoice-card">
+        <div class="invoice-row">
+          <span>Amount to Pay</span>
+          <strong class="color-gold" id="invoice-payment-amount">₹500.00</strong>
+        </div>
+      </div>
+
+      <!-- Mock UPI QR details -->
+      <div class="qr-code-section-wrap">
+        <div class="mock-qr-border">
+          <!-- A stylish SVG-based mock QR code -->
+          <svg viewBox="0 0 100 100" class="svg-qr">
+            <rect x="10" y="10" width="80" height="80" fill="none" stroke="#fff" stroke-width="2"/>
+            <rect x="20" y="20" width="20" height="20" fill="#ffaa00"/>
+            <rect x="60" y="20" width="20" height="20" fill="#ffaa00"/>
+            <rect x="20" y="60" width="20" height="20" fill="#ffaa00"/>
+            <rect x="35" y="35" width="30" height="30" fill="#fff" stroke="#ffaa00" stroke-width="2"/>
+            <circle cx="50" cy="50" r="5" fill="#ffaa00"/>
+          </svg>
+        </div>
+        <p class="qr-info-text">Scan QR code using any UPI App (GPay, PhonePe, Paytm)</p>
+      </div>
+
+      <div class="upi-id-copy-row">
+        <div class="upi-id-label">
+          <span>UPI Address:</span>
+          <strong id="target-upi-address">pandya.pay@ybl</strong>
+        </div>
+        <button class="copy-upi-btn" onclick="copyTargetUpi()">Copy ID</button>
+      </div>
+
+      <!-- Transaction Verification Form -->
+      <div class="utr-verification-form">
+        <div class="utr-input-group">
+          <label for="user-utr-input">Enter 12-Digit UPI Transaction ID / UTR Code</label>
+          <input type="text" id="user-utr-input" placeholder="e.g. 629088231454" maxlength="12">
+        </div>
+        <p class="utr-warning-label">⚡ Payment will auto-credit within 2 minutes of UTR verification.</p>
         
-        <!-- Source Hub Point -->
-        <div class="map-point hub-point" style="left: 15%; top: 70%;">
-          <span class="point-glow"></span>
-          <span class="point-label">Ranjan HQ</span>
-        </div>
-
-        <!-- Destination Den Point -->
-        <div class="map-point den-point" style="left: 80%; top: 20%;">
-          <span class="point-glow pulse"></span>
-          <span class="point-label">Your Den</span>
-        </div>
-
-        <!-- Flight Path Polyline SVG -->
-        <svg class="map-path-svg">
-          <line x1="15%" y1="70%" x2="80%" y2="20%" stroke="#00ffcc" stroke-width="2" stroke-dasharray="6,4" class="path-line"/>
-        </svg>
-
-        <!-- Drone Icon flying along the path -->
-        <div class="drone-flyer" id="drone-icon" style="left: 15%; top: 70%;">
-          🛸
-          <span class="drone-glow"></span>
-        </div>
-      </div>
-
-      <!-- Order Status Timeline Checklist -->
-      <div class="tracker-timeline-section">
-        <h3>Delivery Checklist</h3>
-        <div class="tracker-status-list" id="tracker-status-list">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- Delivery Partner Navigation (Google Maps Redirect) -->
-      <div class="tracker-partner-nav-section">
-        <div class="partner-card-header">
-          <span class="partner-rider-emoji">🛵</span>
-          <div class="partner-meta-details">
-            <h4>Rider Navigation Link</h4>
-            <p>Direct Google Maps route to your coordinates</p>
-          </div>
-        </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=28.6139,77.2090" id="delivery-google-maps-link" target="_blank" class="maps-nav-btn">
-          🗺️ Open Google Maps Route for Rider
-        </a>
-      </div>
-
-      <!-- Bottom action button -->
-      <div class="tracker-footer">
-        <button class="tracker-close-btn" id="close-tracker-btn" disabled>Drone En-Route...</button>
+        <button class="verify-payment-btn" id="verify-payment-btn" onclick="verifyDepositUtr()">
+          Verify & Add Balance
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Location Selector Modal (Full-Screen Layout) -->
-  <div class="location-modal-overlay" id="location-modal-overlay"></div>
-  <div class="location-modal fullscreen" id="location-modal" role="dialog" aria-labelledby="location-modal-title" aria-modal="true">
-    <div class="location-modal-header">
-      <h2 id="location-modal-title">Select Delivery Location</h2>
-      <button class="close-location-btn" id="close-location-modal" aria-label="Close location selector">✕ Close</button>
+
+  <!-- SIMULATED WITHDRAW GATEWAY MODAL -->
+  <div class="modal-overlay" id="withdraw-modal-overlay" onclick="closeWithdrawModal()"></div>
+  <div class="fullscreen-modal-card" id="withdraw-modal">
+    <div class="modal-header">
+      <h2>Request Bank Withdrawal</h2>
+      <button class="close-modal-btn" onclick="closeWithdrawModal()">✕ Close</button>
     </div>
-    <div class="location-modal-body">
-      <!-- Fullscreen GPS target confirm area (Leaflet Map) -->
-      <div class="location-target-section">
-        <div class="map-wrapper-fullscreen">
-          <div id="location-map"></div>
-          <!-- Custom central pin overlay like Uber/Rapido -->
-          <div class="map-center-pin">📍</div>
-        </div>
-        
-        <div class="address-display-card">
-          <span class="addr-badge">DELIVERY PIN LOCATION</span>
-          <div class="addr-text-live" id="live-map-address">Locating your den coordinates...</div>
-        </div>
+    
+    <div class="modal-body-content">
+      <div class="withdraw-balance-dashboard">
+        <span>Withdrawable Balance:</span>
+        <strong id="withdraw-avail-bal">₹1000.00</strong>
+      </div>
 
-        <button class="detect-gps-btn-fullscreen" id="detect-gps-btn">
-          <span class="gps-main-lbl">Confirm Location Pin ➔</span>
-          <span class="gps-status-lbl" id="gps-status-text">Save this map position as your delivery den</span>
-          <span class="gps-spinner" id="gps-spinner" style="display: none;"></span>
-        </button>
+      <div class="utr-input-group">
+        <label for="withdraw-amount-input">Withdrawal Amount (₹)</label>
+        <input type="number" id="withdraw-amount-input" placeholder="Minimum ₹200" min="200" value="500">
+      </div>
 
-        <button class="gps-recenter-btn" id="gps-recenter-btn">
-          🎯 Recenter GPS Location
-        </button>
-        
-        <!-- Live Google Maps Coords Verification -->
-        <div class="google-maps-verify-wrap" id="google-maps-verify-wrap" style="display: none;">
-          <a href="#" id="verify-on-google-maps" target="_blank" class="verify-maps-link">
-            🗺️ Open Google Maps Route Navigation
-          </a>
+      <div class="modal-subheading">Enter Bank Account Details</div>
+      <div class="bank-details-form">
+        <div class="utr-input-group">
+          <label for="bank-ac-num">Account Number</label>
+          <input type="text" id="bank-ac-num" placeholder="e.g. 502000213567">
+        </div>
+        <div class="utr-input-group">
+          <label for="bank-ifsc">IFSC Code</label>
+          <input type="text" id="bank-ifsc" placeholder="e.g. HDFC0000240">
+        </div>
+        <div class="utr-input-group">
+          <label for="bank-holder">Account Holder Name</label>
+          <input type="text" id="bank-holder" placeholder="e.g. Amit Kumar">
         </div>
       </div>
 
-      <div class="location-input-section">
-        <div class="modal-divider-text">OR ENTER ADDRESS MANUALLY</div>
+      <button class="deposit-action-submit" onclick="submitWithdrawRequest()">
+        Submit Withdrawal Request ➔
+      </button>
+    </div>
+  </div>
 
-        <!-- Manual Input -->
-        <div class="manual-address-input-wrap">
-          <input type="text" id="manual-address-input" placeholder="Type room, block, or building address..." aria-label="Manual address input">
-          <button class="save-address-btn" id="save-address-btn">Save Address</button>
-        </div>
 
-        <div class="modal-divider-text">POPULAR DEN LOCATIONS</div>
-
-        <!-- Quick Addresses -->
-        <div class="quick-addresses-list">
-          <button class="quick-addr-item" data-address="🎮 Gamer Lounge, Cyber St, Sector 7">
-            <span class="addr-icon">🎮</span>
-            <span class="addr-details">
-              <span class="addr-title">Gaming Lounge</span>
-              <span class="addr-desc">Sector 7, Cyber Street</span>
-            </span>
-          </button>
-          <button class="quick-addr-item" data-address="🏢 Esports Arena, Suite 10, Alpha Tower">
-            <span class="addr-icon">🏢</span>
-            <span class="addr-details">
-              <span class="addr-title">Esports Arena</span>
-              <span class="addr-desc">Alpha Tower, Cyber City</span>
-            </span>
-          </button>
-          <button class="quick-addr-item" data-address="🏫 Hostel Room 204, Block-C, IIT Delhi">
-            <span class="addr-icon">🏫</span>
-            <span class="addr-details">
-              <span class="addr-title">Gamer Hostel</span>
-              <span class="addr-desc">Room 204, Block-C, IIT Delhi</span>
-            </span>
-          </button>
-        </div>
-      </div>
+  <!-- MOCK ALERT NOTIFICATION CHIP (Floating success) -->
+  <div class="rewards-notification-alert" id="rewards-success-alert" style="display: none;">
+    <div class="reward-glow"></div>
+    <span class="reward-emoji">🎉</span>
+    <div class="reward-text-wrap">
+      <h3 id="reward-alert-title">Congratulations!</h3>
+      <p id="reward-alert-desc">You won ₹200.00 on Red</p>
     </div>
   </div>
 
