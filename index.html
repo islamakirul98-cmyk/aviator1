@@ -14,6 +14,19 @@
 </head>
 <body>
 
+  <!-- Premium Intro Splash Screen Overlay -->
+  <div id="splash-screen" class="splash-screen-overlay">
+    <div class="splash-content">
+      <img src="splash-screen.jpg" alt="Pandya Bet Welcome" class="splash-logo">
+      <div class="splash-loading-wrap">
+        <div class="splash-progress-bar">
+          <div class="splash-progress-fill"></div>
+        </div>
+        <span class="splash-loading-text">Loading premium games...</span>
+      </div>
+    </div>
+  </div>
+
   <!-- App Wrapper -->
   <div class="app-container">
     
@@ -26,6 +39,9 @@
         <span class="logo-p">PANDYA</span><span class="logo-b">BET</span>
       </div>
       <div class="header-actions">
+        <button class="header-action-btn" id="music-toggle-btn" aria-label="Toggle Background Music">
+          <span class="icon">🎵</span>
+        </button>
         <button class="header-action-btn" id="sound-toggle-btn" aria-label="Toggle Sound">
           <span class="icon">🔊</span>
         </button>
@@ -34,6 +50,73 @@
         </button>
       </div>
     </header>
+
+    <!-- MUSIC PLAYER PANEL -->
+    <div class="music-player-dropdown" id="music-player-dropdown">
+      <div class="music-player-header">
+        <div class="music-info-wrap">
+          <span class="music-note-icon">🎵</span>
+          <div class="music-details">
+            <div class="music-track-title" id="music-track-title">Lofi Ambient Loop</div>
+            <div class="music-track-genre" id="music-track-genre">Relaxing background hum</div>
+          </div>
+        </div>
+        <!-- Equalizer CSS Visualizer -->
+        <div class="music-visualizer" id="music-visualizer">
+          <span class="vis-bar bar-1"></span>
+          <span class="vis-bar bar-2"></span>
+          <span class="vis-bar bar-3"></span>
+          <span class="vis-bar bar-4"></span>
+          <span class="vis-bar bar-5"></span>
+        </div>
+      </div>
+
+      <!-- Volume Controller -->
+      <div class="music-volume-section">
+        <span class="vol-icon">🔉</span>
+        <input type="range" class="music-volume-slider" id="music-volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Music Volume">
+        <span class="vol-icon">🔊</span>
+      </div>
+
+      <!-- Playlist Selection -->
+      <div class="music-playlist">
+        <button class="playlist-item active" id="track-btn-0" onclick="selectMusicTrack(0)">
+          <span class="track-dot"></span>
+          <div class="track-info">
+            <span class="track-name">Cyberpunk City</span>
+            <span class="track-meta">Neon synthwave atmosphere</span>
+          </div>
+        </button>
+        <button class="playlist-item" id="track-btn-1" onclick="selectMusicTrack(1)">
+          <span class="track-dot"></span>
+          <div class="track-info">
+            <span class="track-name">Autumn Great Tree</span>
+            <span class="track-meta">Chill fantasy lofi loop</span>
+          </div>
+        </button>
+        <button class="playlist-item" id="track-btn-2" onclick="selectMusicTrack(2)">
+          <span class="track-dot"></span>
+          <div class="track-info">
+            <span class="track-name">Tropical Breeze</span>
+            <span class="track-meta">Relaxing ocean night vibe</span>
+          </div>
+        </button>
+        <button class="playlist-item" id="track-btn-3" onclick="selectMusicTrack(3)">
+          <span class="track-dot"></span>
+          <div class="track-info">
+            <span class="track-name">Procedural Synth</span>
+            <span class="track-meta">Offline algorithmic sequence</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Playback Controls -->
+      <div class="music-controls">
+        <button class="control-btn" onclick="prevMusicTrack()" aria-label="Previous Track">⏮</button>
+        <button class="control-btn play-btn" id="music-play-btn" onclick="toggleMusicPlayback()" aria-label="Play/Pause">⏸</button>
+        <button class="control-btn" onclick="nextMusicTrack()" aria-label="Next Track">⏭</button>
+      </div>
+    </div>
 
     <!-- MAIN APP PAGES SCREEN CONTAINER -->
     <main class="app-content">
@@ -108,6 +191,8 @@
           <button class="tab-chip active">All Games</button>
           <button class="tab-chip">Win Go</button>
           <button class="tab-chip">Aviator</button>
+          <button class="tab-chip">CricTrade</button>
+          <button class="tab-chip">JetX</button>
           <button class="tab-chip">Slots</button>
         </div>
 
@@ -144,6 +229,57 @@
             </div>
             <div class="game-card-footer">
               <span class="play-label">Take Off</span>
+              <span class="play-arrow">➔</span>
+            </div>
+          </div>
+
+          <!-- Spribe Aviator Card -->
+          <div class="game-card card-spribe-aviator" onclick="navigateToScreen('spribe-aviator')">
+            <div class="card-glow"></div>
+            <div class="game-badge red-badge">OFFICIAL</div>
+            <div class="game-card-content">
+              <span class="game-icon">✈️</span>
+              <div class="game-meta">
+                <h3>Aviator Spribe</h3>
+                <p>Official Crash Arena</p>
+              </div>
+            </div>
+            <div class="game-card-footer">
+              <span class="play-label">Play Official</span>
+              <span class="play-arrow">➔</span>
+            </div>
+          </div>
+
+          <!-- JetX Game Card -->
+          <div class="game-card card-jetx" onclick="navigateToScreen('jetx')">
+            <div class="card-glow"></div>
+            <div class="game-badge yellow-badge">NEW</div>
+            <div class="game-card-content">
+              <img src="jetx-icon.png" class="game-icon-img" alt="JetX">
+              <div class="game-meta">
+                <h3>JetX</h3>
+                <p>Blast Off Multiplier</p>
+              </div>
+            </div>
+            <div class="game-card-footer">
+              <span class="play-label">Play JetX</span>
+              <span class="play-arrow">➔</span>
+            </div>
+          </div>
+
+          <!-- CricTrade Game Card -->
+          <div class="game-card card-crictrade" onclick="navigateToScreen('crictrade')">
+            <div class="card-glow"></div>
+            <div class="game-badge blue-badge">TRADING</div>
+            <div class="game-card-content">
+              <span class="game-icon">🏏</span>
+              <div class="game-meta">
+                <h3>CricTrade</h3>
+                <p>Yes/No Cricket Opinions</p>
+              </div>
+            </div>
+            <div class="game-card-footer">
+              <span class="play-label">Trade Opinions</span>
               <span class="play-arrow">➔</span>
             </div>
           </div>
@@ -392,6 +528,476 @@
 
       </section>
 
+      <!-- ================= SPRIBE AVIATOR SCREEN ================= -->
+      <section class="app-screen" id="screen-spribe-aviator">
+        
+        <!-- Screen Nav -->
+        <div class="screen-navbar spribe-nav">
+          <button class="nav-back-btn" onclick="navigateToScreen('lobby')">↩ Lobby</button>
+          <div class="spribe-logo-wrap">
+            <span class="spribe-plane-icon">✈️</span>
+            <span class="spribe-logo-txt">Aviator</span>
+            <span class="spribe-subtext">powered by SPRIBE</span>
+          </div>
+          <button class="rule-btn" onclick="openSpribeAviatorRules()">How to play</button>
+        </div>
+
+        <!-- Spribe Past Crash History Multipliers Row -->
+        <div class="spribe-history-row" id="spribe-history-list">
+          <!-- Populated dynamically by crash records -->
+        </div>
+
+        <!-- Flight Path Canvas Chart Window -->
+        <div class="spribe-chart-container">
+          <canvas id="spribe-canvas"></canvas>
+          
+          <!-- Live Multiplier numbers -->
+          <div class="spribe-multiplier-wrap" id="spribe-multiplier-display">
+            <span class="mult-val" id="spribe-mult-num">1.00</span><span class="mult-x">x</span>
+          </div>
+
+          <!-- Crash Alert message overlays -->
+          <div class="spribe-flew-away-alert" id="spribe-flew-away-alert" style="display: none;">
+            <div class="flew-away-banner">FLEW AWAY!</div>
+            <p>Plane crashed at <span id="spribe-crash-value">1.45x</span></p>
+          </div>
+
+          <!-- Waiting for next round overlay -->
+          <div class="spribe-waiting-alert" id="spribe-waiting-display">
+            <div class="spribe-ufc-partners">
+              <span class="ufc-txt">UFC</span>
+              <span class="divider">|</span>
+              <span class="aviator-logo-mini">
+                <span class="plane-sym">✈</span> Aviator
+              </span>
+            </div>
+            <div class="spribe-partners-sub">OFFICIAL PARTNERS</div>
+            
+            <div class="spribe-progress-container">
+              <div class="spribe-progress-fill" id="spribe-takeoff-progress-bar"></div>
+            </div>
+            
+            <div class="spribe-official-badge">
+              <div class="spribe-logo-side">
+                <div class="spribe-dots-logo">
+                  ●●●<br>●&nbsp;&nbsp;<br>●●●<br>&nbsp;&nbsp;●<br>●●●
+                </div>
+                <div class="spribe-name">SPRIBE</div>
+              </div>
+              <div class="spribe-divider-vertical"></div>
+              <div class="spribe-game-side">
+                <div class="spribe-official-row">
+                  Official Game <span class="check-icon">✔</span>
+                </div>
+                <div class="spribe-since">Since 2018</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dual Cockpit Consoles for Double Bets -->
+        <div class="spribe-consoles-wrap">
+          
+          <!-- Left Panel console -->
+          <div class="spribe-console-card" id="spribe-console-left">
+            <div class="spribe-console-tabs">
+              <button class="spribe-tab-btn active" id="spribe-tab-bet-left" onclick="switchSpribeConsoleTab('left', 'bet')">Bet</button>
+              <button class="spribe-tab-btn" id="spribe-tab-auto-left" onclick="switchSpribeConsoleTab('left', 'auto')">Auto</button>
+            </div>
+            
+            <div class="spribe-console-body">
+              <div class="spribe-bet-controls">
+                <div class="spribe-amount-tuner">
+                  <button class="spribe-tune-btn" onclick="adjustSpribeBetAmount('left', -10)">-</button>
+                  <input type="number" id="spribe-bet-amt-left" value="100">
+                  <button class="spribe-tune-btn" onclick="adjustSpribeBetAmount('left', 10)">+</button>
+                </div>
+                <button class="spribe-bet-submit-btn" id="spribe-bet-btn-left" onclick="handleSpribeBetClick('left')">
+                  <span class="btn-main-lbl">BET</span>
+                  <span class="btn-sub-lbl">₹100.00</span>
+                </button>
+              </div>
+              <div class="spribe-preset-row">
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('left', 10)">₹10</button>
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('left', 20)">₹20</button>
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('left', 50)">₹50</button>
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('left', 100)">₹100</button>
+              </div>
+              <!-- Auto Panel Settings -->
+              <div class="spribe-auto-settings" id="spribe-auto-left" style="display: none;">
+                <div class="spribe-auto-row">
+                  <label class="spribe-checkbox-wrap">
+                    <input type="checkbox" id="spribe-autobet-check-left" onchange="toggleSpribeAutoBet('left')">
+                    <span class="checkmark"></span>
+                    Auto Bet
+                  </label>
+                  <div class="spribe-autocashout-wrap">
+                    <label class="spribe-checkbox-wrap">
+                      <input type="checkbox" id="spribe-autocashout-check-left" onchange="toggleSpribeAutoCashout('left')">
+                      <span class="checkmark"></span>
+                      Auto Cash Out
+                    </label>
+                    <input type="number" step="0.01" class="spribe-auto-input" id="spribe-autocashout-val-left" value="2.00" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Panel console -->
+          <div class="spribe-console-card" id="spribe-console-right">
+            <div class="spribe-console-tabs">
+              <button class="spribe-tab-btn active" id="spribe-tab-bet-right" onclick="switchSpribeConsoleTab('right', 'bet')">Bet</button>
+              <button class="spribe-tab-btn" id="spribe-tab-auto-right" onclick="switchSpribeConsoleTab('right', 'auto')">Auto</button>
+            </div>
+            
+            <div class="spribe-console-body">
+              <div class="spribe-bet-controls">
+                <div class="spribe-amount-tuner">
+                  <button class="spribe-tune-btn" onclick="adjustSpribeBetAmount('right', -10)">-</button>
+                  <input type="number" id="spribe-bet-amt-right" value="200">
+                  <button class="spribe-tune-btn" onclick="adjustSpribeBetAmount('right', 10)">+</button>
+                </div>
+                <button class="spribe-bet-submit-btn" id="spribe-bet-btn-right" onclick="handleSpribeBetClick('right')">
+                  <span class="btn-main-lbl">BET</span>
+                  <span class="btn-sub-lbl">₹200.00</span>
+                </button>
+              </div>
+              <div class="spribe-preset-row">
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('right', 10)">₹10</button>
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('right', 20)">₹20</button>
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('right', 50)">₹50</button>
+                <button class="spribe-preset-chip" onclick="setSpribeBetAmount('right', 100)">₹100</button>
+              </div>
+              <!-- Auto Panel Settings -->
+              <div class="spribe-auto-settings" id="spribe-auto-right" style="display: none;">
+                <div class="spribe-auto-row">
+                  <label class="spribe-checkbox-wrap">
+                    <input type="checkbox" id="spribe-autobet-check-right" onchange="toggleSpribeAutoBet('right')">
+                    <span class="checkmark"></span>
+                    Auto Bet
+                  </label>
+                  <div class="spribe-autocashout-wrap">
+                    <label class="spribe-checkbox-wrap">
+                      <input type="checkbox" id="spribe-autocashout-check-right" onchange="toggleSpribeAutoCashout('right')">
+                      <span class="checkmark"></span>
+                      Auto Cash Out
+                    </label>
+                    <input type="number" step="0.01" class="spribe-auto-input" id="spribe-autocashout-val-right" value="2.00" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Simulated Live Bets Table -->
+        <div class="spribe-live-table-container">
+          <div class="spribe-live-table-tabs">
+            <button class="spribe-table-tab active" id="spribe-live-tab-all" onclick="switchSpribeLiveTableTab('all')">All Bets</button>
+            <button class="spribe-table-tab" id="spribe-live-tab-my" onclick="switchSpribeLiveTableTab('my')">My Bets</button>
+          </div>
+          
+          <div class="spribe-table-info-bar">
+            <span id="spribe-live-total-bets">All bets: 0</span>
+            <span id="spribe-live-total-won" class="spribe-text-green"></span>
+          </div>
+
+          <div class="spribe-live-table-header">
+            <span>User</span>
+            <span>Bet</span>
+            <span>Mult</span>
+            <span>Cash Out</span>
+          </div>
+
+          <div class="spribe-live-rows-wrap" id="spribe-live-rows-container">
+            <!-- Populated dynamically -->
+          </div>
+          
+          <div class="spribe-live-rows-wrap" id="spribe-my-rows-container" style="display: none;">
+            <div class="spribe-empty-table-msg">No bets placed in this session.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= JETX SCREEN ================= -->
+      <section class="app-screen" id="screen-jetx">
+        
+        <!-- Screen Nav -->
+        <div class="screen-navbar jetx-nav">
+          <button class="nav-back-btn" onclick="navigateToScreen('lobby')">↩ Lobby</button>
+          <div class="jetx-logo-wrap">
+            <span class="jetx-rocket-icon">🚀</span>
+            <span class="jetx-logo-txt">Jet<span class="jetx-logo-x">X</span></span>
+          </div>
+          <button class="rule-btn" onclick="openJetxRules()">How to play</button>
+        </div>
+
+        <!-- JetX Past Crash History Multipliers Row -->
+        <div class="jetx-history-row" id="jetx-history-list">
+          <!-- Populated dynamically by crash records -->
+        </div>
+
+        <!-- Flight Path Canvas Chart Window -->
+        <div class="jetx-chart-container">
+          <canvas id="jetx-canvas"></canvas>
+          
+          <!-- Live Multiplier numbers -->
+          <div class="jetx-multiplier-wrap" id="jetx-multiplier-display">
+            <span class="mult-val" id="jetx-mult-num">1.00</span><span class="mult-x">x</span>
+          </div>
+
+          <!-- Crash Alert message overlays -->
+          <div class="jetx-flew-away-alert" id="jetx-flew-away-alert" style="display: none;">
+            <div class="flew-away-banner">BOOM!</div>
+            <p>Exploded at <span id="jetx-crash-value">1.45x</span></p>
+          </div>
+
+          <!-- Waiting for next round overlay -->
+          <div class="jetx-waiting-alert" id="jetx-waiting-display">
+            <div class="jetx-next-round-info">
+              <span class="rocket-emoji-spin">🚀</span>
+              <h3>Next Jet Takeoff</h3>
+            </div>
+            
+            <div class="jetx-progress-container">
+              <div class="jetx-progress-fill" id="jetx-takeoff-progress-bar"></div>
+            </div>
+            
+            <div class="jetx-status-txt">
+              Takeoff in <span id="jetx-takeoff-timer">5</span>s
+            </div>
+          </div>
+        </div>
+
+        <!-- Dual Cockpit Consoles for Double Bets -->
+        <div class="jetx-consoles-wrap">
+          
+          <!-- Left Panel console -->
+          <div class="jetx-console-card" id="jetx-console-left">
+            <div class="jetx-console-tabs">
+              <button class="jetx-tab-btn active" id="jetx-tab-bet-left" onclick="switchJetxConsoleTab('left', 'bet')">Bet</button>
+              <button class="jetx-tab-btn" id="jetx-tab-auto-left" onclick="switchJetxConsoleTab('left', 'auto')">Auto</button>
+            </div>
+            
+            <div class="jetx-console-body">
+              <div class="jetx-bet-controls">
+                <div class="jetx-amount-tuner">
+                  <button class="jetx-tune-btn" onclick="adjustJetxBetAmount('left', -10)">-</button>
+                  <input type="number" id="jetx-bet-amt-left" value="100">
+                  <button class="jetx-tune-btn" onclick="adjustJetxBetAmount('left', 10)">+</button>
+                </div>
+                <button class="jetx-bet-submit-btn" id="jetx-bet-btn-left" onclick="handleJetxBetClick('left')">
+                  <span class="btn-main-lbl">BET</span>
+                  <span class="btn-sub-lbl">₹100.00</span>
+                </button>
+              </div>
+              <div class="jetx-preset-row">
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('left', 10)">₹10</button>
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('left', 25)">₹25</button>
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('left', 50)">₹50</button>
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('left', 100)">₹100</button>
+              </div>
+              <!-- Auto Panel Settings -->
+              <div class="jetx-auto-settings" id="jetx-auto-left" style="display: none;">
+                <div class="jetx-auto-row">
+                  <label class="jetx-checkbox-wrap">
+                    <input type="checkbox" id="jetx-autobet-check-left" onchange="toggleJetxAutoBet('left')">
+                    <span class="checkmark"></span>
+                    Auto Bet
+                  </label>
+                  <div class="jetx-autocashout-wrap">
+                    <label class="jetx-checkbox-wrap">
+                      <input type="checkbox" id="jetx-autocashout-check-left" onchange="toggleJetxAutoCashout('left')">
+                      <span class="checkmark"></span>
+                      Auto Cash Out
+                    </label>
+                    <input type="number" step="0.01" class="jetx-auto-input" id="jetx-autocashout-val-left" value="2.00" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Panel console -->
+          <div class="jetx-console-card" id="jetx-console-right">
+            <div class="jetx-console-tabs">
+              <button class="jetx-tab-btn active" id="jetx-tab-bet-right" onclick="switchJetxConsoleTab('right', 'bet')">Bet</button>
+              <button class="jetx-tab-btn" id="jetx-tab-auto-right" onclick="switchJetxConsoleTab('right', 'auto')">Auto</button>
+            </div>
+            
+            <div class="jetx-console-body">
+              <div class="jetx-bet-controls">
+                <div class="jetx-amount-tuner">
+                  <button class="jetx-tune-btn" onclick="adjustJetxBetAmount('right', -10)">-</button>
+                  <input type="number" id="jetx-bet-amt-right" value="200">
+                  <button class="jetx-tune-btn" onclick="adjustJetxBetAmount('right', 10)">+</button>
+                </div>
+                <button class="jetx-bet-submit-btn" id="jetx-bet-btn-right" onclick="handleJetxBetClick('right')">
+                  <span class="btn-main-lbl">BET</span>
+                  <span class="btn-sub-lbl">₹200.00</span>
+                </button>
+              </div>
+              <div class="jetx-preset-row">
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('right', 10)">₹10</button>
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('right', 25)">₹25</button>
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('right', 50)">₹50</button>
+                <button class="jetx-preset-chip" onclick="setJetxBetAmount('right', 100)">₹100</button>
+              </div>
+              <!-- Auto Panel Settings -->
+              <div class="jetx-auto-settings" id="jetx-auto-right" style="display: none;">
+                <div class="jetx-auto-row">
+                  <label class="jetx-checkbox-wrap">
+                    <input type="checkbox" id="jetx-autobet-check-right" onchange="toggleJetxAutoBet('right')">
+                    <span class="checkmark"></span>
+                    Auto Bet
+                  </label>
+                  <div class="jetx-autocashout-wrap">
+                    <label class="jetx-checkbox-wrap">
+                      <input type="checkbox" id="jetx-autocashout-check-right" onchange="toggleJetxAutoCashout('right')">
+                      <span class="checkmark"></span>
+                      Auto Cash Out
+                    </label>
+                    <input type="number" step="0.01" class="jetx-auto-input" id="jetx-autocashout-val-right" value="2.00" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Simulated Live Bets Table -->
+        <div class="jetx-live-table-container">
+          <div class="jetx-live-table-tabs">
+            <button class="jetx-table-tab active" id="jetx-live-tab-all" onclick="switchJetxLiveTableTab('all')">All Bets</button>
+            <button class="jetx-table-tab" id="jetx-live-tab-my" onclick="switchJetxLiveTableTab('my')">My Bets</button>
+          </div>
+          
+          <div class="jetx-table-info-bar">
+            <span id="jetx-live-total-bets">All bets: 0</span>
+            <span id="jetx-live-total-won" class="jetx-text-green"></span>
+          </div>
+
+          <div class="jetx-live-table-header">
+            <span>User</span>
+            <span>Bet</span>
+            <span>Mult</span>
+            <span>Cash Out</span>
+          </div>
+
+          <div class="jetx-live-rows-wrap" id="jetx-live-rows-container">
+            <!-- Populated dynamically -->
+          </div>
+          
+          <div class="jetx-live-rows-wrap" id="jetx-my-rows-container" style="display: none;">
+            <div class="jetx-empty-table-msg">No bets placed in this session.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= CRICTRADE (OPINION TRADING) SCREEN ================= -->
+      <section class="app-screen" id="screen-crictrade">
+        
+        <!-- Screen Nav -->
+        <div class="screen-navbar crictrade-nav">
+          <button class="nav-back-btn" onclick="navigateToScreen('lobby')">↩ Lobby</button>
+          <div class="crictrade-navbar-title">
+            <span class="live-dot-blink"></span>
+            <h2>CricTrade</h2>
+          </div>
+          <button class="rule-btn" onclick="openCricTradeRules()">Rules</button>
+        </div>
+
+        <!-- Live Match Scorecard Card -->
+        <div class="crictrade-scorecard-card">
+          <div class="scorecard-header">
+            <span class="match-league">IND vs PAK - T20 League</span>
+            <span class="live-badge-card">LIVE</span>
+          </div>
+          <div class="scorecard-teams-row">
+            <div class="team-info">
+              <span class="team-flag">🇮🇳</span>
+              <span class="team-name-code">IND</span>
+            </div>
+            <div class="team-score-info">
+              <span class="team-runs-wickets" id="cric-ind-runs">42/2</span>
+              <span class="team-overs" id="cric-ind-overs">(5.1 overs)</span>
+            </div>
+          </div>
+          
+          <!-- Batsmen and Bowler row -->
+          <div class="scorecard-players-wrap">
+            <div class="batsmen-wrap">
+              <div class="player-stat"><span class="batsman-name" id="cric-batsman1-name">V. Kohli</span>: <strong id="cric-batsman1-stat">18*(12)</strong></div>
+              <div class="player-stat"><span class="batsman-name" id="cric-batsman2-name">R. Pant</span>: <strong id="cric-batsman2-stat">12*(9)</strong></div>
+            </div>
+            <div class="bowler-wrap">
+              <div class="player-stat">Bowler: <strong id="cric-bowler-stat">S. Afridi 1/14</strong></div>
+            </div>
+          </div>
+
+          <!-- Ball log ticker -->
+          <div class="scorecard-ball-log">
+            <span class="ball-label">Recent:</span>
+            <div class="ball-history-row" id="cric-ball-history">
+              <span class="ball-item run-1">1</span>
+              <span class="ball-item run-w">W</span>
+              <span class="ball-item run-4">4</span>
+              <span class="ball-item run-0">0</span>
+              <span class="ball-item run-6">6</span>
+              <span class="ball-item run-2">2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Commentary log ticker banner -->
+        <div class="cric-commentary-ticker">
+          <div class="commentary-badge">Live</div>
+          <div class="commentary-content-scroll">
+            <span id="cric-live-commentary">IND needs 22 runs in 14 balls to win! V. Kohli is at the crease.</span>
+          </div>
+        </div>
+
+        <!-- CricTrade Sub-navigation Tabs -->
+        <div class="crictrade-tabs-wrap">
+          <button class="crictrade-tab active" id="cric-tab-opinions" onclick="switchCricTradeTab('opinions')">Live Opinions</button>
+          <button class="crictrade-tab" id="cric-tab-trades" onclick="switchCricTradeTab('trades')">My Trades (<span id="cric-active-trades-count">0</span>)</button>
+        </div>
+
+        <!-- Live Opinions View -->
+        <div class="crictrade-body-tab" id="cric-view-opinions">
+          <div class="opinions-list" id="cric-opinions-container">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- My Trades (Portfolio) View -->
+        <div class="crictrade-body-tab" id="cric-view-trades" style="display: none;">
+          <div class="cric-portfolio-summary">
+            <div class="summary-box">
+              <span class="summary-lbl">Invested</span>
+              <strong id="cric-total-invested">₹0.00</strong>
+            </div>
+            <div class="summary-box">
+              <span class="summary-lbl">Current Value</span>
+              <strong id="cric-total-value">₹0.00</strong>
+            </div>
+            <div class="summary-box">
+              <span class="summary-lbl">Return</span>
+              <strong id="cric-total-pnl" class="neutral-pnl">₹0.00</strong>
+            </div>
+          </div>
+          <div class="portfolio-list" id="cric-portfolio-container">
+            <div class="cric-empty-portfolio-msg">No active trades. Pick an opinion to start trading!</div>
+          </div>
+        </div>
+
+      </section>
+
     </main>
 
     <!-- Bottom App Navigation tab bar -->
@@ -418,6 +1024,73 @@
 
 
   <!-- ================= DIALOGS AND OVERLAY MODALS ================= -->
+
+  <!-- CRICTRADE BID ORDER SELECTION DRAWER -->
+  <div class="modal-overlay" id="crictrade-drawer-overlay" onclick="closeCricTradeDrawer()"></div>
+  <div class="bet-selection-drawer crictrade-drawer" id="crictrade-bid-drawer">
+    <div class="drawer-header">
+      <h3 id="cric-drawer-title">Place Opinion Bid</h3>
+      <button class="drawer-close" onclick="closeCricTradeDrawer()">✕</button>
+    </div>
+    
+    <div class="drawer-body">
+      <!-- Question overview and selection tag -->
+      <div class="cric-selected-question-desc" id="cric-drawer-question">
+        Will India score 50 or more runs in the first 6 overs?
+      </div>
+      <div class="cric-bid-selection-badge" id="cric-drawer-selection">
+        Your selection: <strong id="cric-drawer-selection-text" class="yes-text">YES</strong>
+      </div>
+      
+      <!-- Bid Price stepper -->
+      <div class="drawer-selection-label">Select Buy Price (per contract)</div>
+      <div class="cric-bid-price-row">
+        <button class="cric-tune-btn" onclick="adjustCricBidPrice(-0.5)">−</button>
+        <div class="cric-price-val-wrap">
+          <span class="cric-currency">₹</span>
+          <span class="cric-price-num" id="cric-drawer-price">7.5</span>
+        </div>
+        <button class="cric-tune-btn" onclick="adjustCricBidPrice(0.5)">+</button>
+      </div>
+
+      <!-- Quantity Counter selection -->
+      <div class="drawer-selection-label">Quantity</div>
+      <div class="cric-quantity-row">
+        <button class="cric-tune-btn" onclick="adjustCricQty(-1)">−</button>
+        <input type="number" class="cric-qty-input" id="cric-drawer-qty" value="5" min="1">
+        <button class="cric-tune-btn" onclick="adjustCricQty(1)">+</button>
+      </div>
+      
+      <!-- Bid order statistics layout -->
+      <div class="cric-bid-invoice-card">
+        <div class="invoice-row">
+          <span>Investment Amount:</span>
+          <strong id="cric-drawer-investment">₹37.50</strong>
+        </div>
+        <div class="invoice-row font-small">
+          <span>Payout on Win:</span>
+          <strong class="color-green" id="cric-drawer-payout">₹50.00</strong>
+        </div>
+        <div class="invoice-row font-small">
+          <span>Potential Net Profit:</span>
+          <strong id="cric-drawer-profit" class="color-gold">₹12.50 (+33.3%)</strong>
+        </div>
+      </div>
+
+      <div class="agreement-row">
+        <input type="checkbox" id="cric-agreement-check" checked>
+        <label for="cric-agreement-check">I agree to the CricTrade Event Betting Rules</label>
+      </div>
+    </div>
+
+    <!-- Confirmation CTA Buttons -->
+    <div class="drawer-footer-actions">
+      <button class="drawer-action-btn cancel-btn" onclick="closeCricTradeDrawer()">Cancel</button>
+      <button class="drawer-action-btn confirm-btn confirm-cric-btn" id="cric-drawer-confirm-btn" onclick="submitCricTradeOrder()">
+        Confirm Trade (₹37.50)
+      </button>
+    </div>
+  </div>
 
   <!-- WINGO BET SELECTION BOTTOM DRAWER -->
   <div class="modal-overlay" id="wingo-bet-drawer-overlay" onclick="closeBetDrawer()"></div>
