@@ -753,14 +753,31 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Handle intro splash screen display for 2 seconds
   const splashScreen = document.getElementById('splash-screen');
+  const loginPage = document.getElementById('screen-login');
+  
   if (splashScreen) {
     setTimeout(() => {
       splashScreen.classList.add('fade-out');
-      // Completely remove from DOM after transitions finish
+      
+      // Check login status after splash screen fades
       setTimeout(() => {
         splashScreen.remove();
+        const isLoggedIn = localStorage.getItem('pandya_logged_in') === 'true';
+        if (isLoggedIn) {
+          if (loginPage) loginPage.classList.add('hidden');
+        } else {
+          if (loginPage) loginPage.classList.remove('hidden');
+        }
       }, 500);
     }, 2000);
+  } else {
+    // If no splash screen, check login status immediately
+    const isLoggedIn = localStorage.getItem('pandya_logged_in') === 'true';
+    if (isLoggedIn) {
+      if (loginPage) loginPage.classList.add('hidden');
+    } else {
+      if (loginPage) loginPage.classList.remove('hidden');
+    }
   }
   
   // Set initial UI elements
@@ -4496,4 +4513,100 @@ function showCricNotification(title, msg, success = true) {
 function openCricTradeRules() {
   alert("CricTrade Opinion Trading Rules:\n\n1. YES/NO contracts are priced from ₹0.5 to ₹9.5.\n2. Standard value resolves at ₹10.0 if you win and ₹0.0 if you lose.\n3. Sum of YES + NO prices is always ₹10.0.\n4. You can sell your active contracts early to lock in your live profit or loss!\n5. Limit orders will match only when the market price meets your bid.");
 }
+
+
+// ==========================================================================
+// PREMIUM LOGIN & REGISTRATION HANDLERS
+// ==========================================================================
+
+let isLoginRegisterMode = false; // false = Login, true = Register
+
+function togglePasswordVisibility() {
+  const pwdInput = document.getElementById('login-password');
+  if (pwdInput) {
+    if (pwdInput.type === 'password') {
+      pwdInput.type = 'text';
+    } else {
+      pwdInput.type = 'password';
+    }
+  }
+  playTickSound();
+}
+
+function toggleRegisterMode(event) {
+  if (event) event.preventDefault();
+  isLoginRegisterMode = !isLoginRegisterMode;
+  
+  const cardTitle = document.getElementById('login-title');
+  const cardSubtitle = document.getElementById('login-card-subtitle');
+  const submitBtn = document.getElementById('login-submit-btn');
+  const promoText = document.getElementById('login-promo-text');
+  const promoLink = document.getElementById('login-promo-link');
+  const optionsRow = document.getElementById('login-options-row');
+  
+  if (isLoginRegisterMode) {
+    if (cardTitle) cardTitle.textContent = 'REGISTER TO PLAY';
+    if (cardSubtitle) cardSubtitle.textContent = 'Register a new player account securely';
+    if (submitBtn) submitBtn.textContent = 'Create Account & Login';
+    if (promoText) promoText.textContent = 'Already have an account?';
+    if (promoLink) promoLink.textContent = 'Sign In';
+    if (optionsRow) optionsRow.style.display = 'none'; // Hide remember/forgot for register
+  } else {
+    if (cardTitle) cardTitle.textContent = 'LOGIN TO PLAY';
+    if (cardSubtitle) cardSubtitle.textContent = 'Premium Betting & Gaming Platform';
+    if (submitBtn) submitBtn.textContent = 'Login Securely';
+    if (promoText) promoText.textContent = 'New to Pandya Bet?';
+    if (promoLink) promoLink.textContent = 'Create Account';
+    if (optionsRow) optionsRow.style.display = 'flex';
+  }
+  playTickSound();
+}
+
+function handleLoginSubmit(event) {
+  if (event) event.preventDefault();
+  
+  const submitBtn = document.getElementById('login-submit-btn');
+  
+  if (submitBtn) {
+    submitBtn.textContent = isLoginRegisterMode ? 'Creating Account...' : 'Verifying Credentials...';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.75';
+  }
+  
+  playLockSound();
+  
+  // Simulate network authentication latency (1.2s)
+  setTimeout(() => {
+    localStorage.setItem('pandya_logged_in', 'true');
+    
+    // Close screen
+    const loginPage = document.getElementById('screen-login');
+    if (loginPage) {
+      loginPage.classList.add('hidden');
+    }
+    
+    // Play success cues
+    playWinSound();
+    
+    // Show success alerts
+    const welcomeMsg = isLoginRegisterMode ? 'Welcome to Pandya Bet! Account created successfully.' : 'Welcome back to Pandya Bet!';
+    if (typeof showRewardAlertPopup === 'function') {
+      showRewardAlertPopup("Login Successful", welcomeMsg);
+    } else {
+      alert(welcomeMsg);
+    }
+    
+    // Auto launch BGM continuous soundtrack (first user interaction achieved)
+    if (!bgmIsPlaying && typeof toggleMusicPlayback === 'function') {
+      toggleMusicPlayback();
+    }
+    
+  }, 1200);
+}
+
+function forgotPasswordAlert(event) {
+  if (event) event.preventDefault();
+  alert("Password Recovery Helper:\n\nDefault guest password is '123456'. Enter any mobile number and password to log in instantly!");
+}
+
 

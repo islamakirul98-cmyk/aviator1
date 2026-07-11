@@ -27,6 +27,68 @@
     </div>
   </div>
 
+  </div>
+
+  <!-- Dedicated Login & Registration Page Screen -->
+  <div id="screen-login" class="login-page-screen">
+    <div class="login-page-bg"></div>
+    <div class="login-page-content">
+      <div class="login-card">
+        <div class="login-header">
+          <span class="logo-p">PANDYA</span><span class="logo-b">BET</span>
+          <h2 class="login-card-title" id="login-title">LOGIN TO PLAY</h2>
+          <p class="login-subtitle" id="login-card-subtitle">Premium Betting & Gaming Platform</p>
+        </div>
+        
+        <form id="login-form" onsubmit="handleLoginSubmit(event)">
+          <!-- Username Input -->
+          <div class="input-group" id="group-username">
+            <label for="login-username">Username</label>
+            <div class="input-field-wrap">
+              <span class="field-icon">👤</span>
+              <input type="text" id="login-username" placeholder="Enter username" value="PandyaPlayer" required>
+            </div>
+          </div>
+
+          <!-- Mobile Number Input -->
+          <div class="input-group">
+            <label for="login-phone">Mobile Number</label>
+            <div class="phone-input-wrap">
+              <span class="country-code">🇮🇳 +91</span>
+              <input type="tel" id="login-phone" placeholder="Enter mobile number" value="9876543210" required>
+            </div>
+          </div>
+          
+          <!-- Password Input -->
+          <div class="input-group">
+            <label for="login-password">Password</label>
+            <div class="password-input-wrap">
+              <span class="field-icon">🔒</span>
+              <input type="password" id="login-password" placeholder="Enter password" value="123456" required>
+              <button type="button" class="pwd-toggle-btn" onclick="togglePasswordVisibility()" aria-label="Toggle Password Visibility">👁️</button>
+            </div>
+          </div>
+          
+          <!-- Options Row -->
+          <div class="login-actions-row" id="login-options-row">
+            <label class="remember-me">
+              <input type="checkbox" id="login-remember-me" checked>
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-link" onclick="forgotPasswordAlert(event)">Forgot Password?</a>
+          </div>
+          
+          <button type="submit" class="login-btn-submit" id="login-submit-btn">Login Securely</button>
+          
+          <div class="register-promo">
+            <span id="login-promo-text">New to Pandya Bet?</span>
+            <a href="#" class="register-link" id="login-promo-link" onclick="toggleRegisterMode(event)">Create Account</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- App Wrapper -->
   <div class="app-container">
     
