@@ -37,6 +37,8 @@ while ($listener.IsListening) {
                 ".svg"  { $response.ContentType = "image/svg+xml; charset=utf-8" }
                 ".png"  { $response.ContentType = "image/png" }
                 ".jpg"  { $response.ContentType = "image/jpeg" }
+                ".gif"  { $response.ContentType = "image/gif" }
+                ".webm" { $response.ContentType = "video/webm" }
                 default { $response.ContentType = "application/octet-stream" }
             }
             
